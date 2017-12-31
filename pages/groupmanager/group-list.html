@@ -1,0 +1,86 @@
+<!-- Main content -->
+<section class="content" id="searchGroupSection" ms-controller="group_view">
+
+    <div class="box box-search">
+        <!--<div class="box-header with-border">-->
+        <!--<h3 class="box-title"></h3>-->
+        <!--<div class="box-tools pull-right">-->
+        <!--<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>-->
+        <!--</div>-->
+        <!--</div>-->
+        <div class="box-body">
+            <form class="form-horizontal" id="searchGroupForm">
+                <div class="form-group">
+                    <label for="groupCode" class="col-sm-1 control-label">编码</label>
+
+                    <div class="col-sm-5">
+                        <input type="text" name="groupCode" class="form-control" id="groupCode" placeholder="编码">
+                    </div>
+                    <label for="groupName" class="col-sm-1 control-label">名称</label>
+
+                    <div class="col-sm-5">
+                        <input type="text" name="groupName" class="form-control" id="groupName" placeholder="名称">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description" class="col-sm-1 control-label">详细描述</label>
+
+                    <div class="col-sm-11">
+                        <input type="text" name="description" class="form-control" id="description" placeholder="描述">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="searchGroupBtn" class="col-sm-1 control-label"></label>
+                    <div class="col-sm-2 col-lg-1">
+                        <input id="searchGroupBtn" type="button" class="form-control btn-primary" value="查询">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- /.box -->
+
+
+    <div class="box box-result">
+        <!--   .box-header   -->
+        <div class="box-header with-border">
+            <button type="submit" class="btn btn-primary btn-sm"
+                    onclick='$(this).goView("/pages/groupmanager/group-add.html");'
+            >新增
+            </button>
+            <button type="button" class="btn btn-primary btn-sm" id="toAssignRoleBtn"
+            >分配角色
+            </button>
+
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+            </div>
+
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table id="groupListTable"
+                   class="table dataTable table-striped row-border cell-border "
+                   cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>主键</th>
+                    <th>编码</th>
+                    <th>名称</th>
+                    <th>描述</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+            </table>
+
+
+            <!-- /.row -->
+        </div>
+    </div>
+
+</section>
+<script src="group-list.js"></script>

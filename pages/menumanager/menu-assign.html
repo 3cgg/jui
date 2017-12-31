@@ -1,0 +1,219 @@
+<!-- Main content -->
+<section class="content" id="editMenuSection" ms-controller="menu_edit">
+
+    <form role="form" id="editMenuForm" class="form-horizontal">
+
+        <div class="box box-bys-btn">
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary btn-sm">提交</button>
+                <button type="button" class="btn btn-primary btn-sm"
+                        onclick='$(this).goView("/pages/menumanager/menu-list.html");'
+                >返回
+                </button>
+                <div class="box-tools pull-right">
+                    Menu Assign
+                </div>
+            </div>
+        </div>
+
+        <div class="box box-bys-content">
+            <!--   .box-header   -->
+            <!--<div class="box-header with-border">-->
+            <!--<h3 class="box-title">Menu Assign</h3>-->
+            <!--<div class="box-tools pull-right">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!-- /.box-header -->
+
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="code" class="col-sm-1 control-label ">编码</label>
+                    <div class="col-sm-5">
+                        <span id="code" class="form-control label-form-control">{{data.code}}</span>
+                    </div>
+                    <label for="name" class="col-sm-1 control-label requiredMask">名称</label>
+                    <div class="col-sm-5">
+                        <span id="name" class="form-control label-form-control">{{data.name}}</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="sequence" class="col-sm-1 control-label ">顺序</label>
+                    <div class="col-sm-5">
+                        <span id="sequence" class="form-control label-form-control">{{data.sequence}}</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="url" class="col-sm-1 control-label requiredMask">地址</label>
+                    <div class="col-sm-5">
+                        <span id="url" class="form-control label-form-control">{{data.url}}</span>
+                    </div>
+                    <label for="description" class="col-sm-1 control-label requiredMask">描述</label>
+                    <div class="col-sm-5">
+                        <span id="description" class="form-control label-form-control">{{data.description}}</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <input type="hidden" name="id" ms-attr-value="data.id"/>
+    </form>
+
+    <div class="box box-follow">
+        <!--   .box-header   -->
+        <div class="box-header with-border">
+            <h3 class="box-title">角色</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <!-- /.box-header -->
+
+        <div class="box-body form-horizontal">
+            <div class="col-md-6" style="padding-left: 0px;">
+
+                <div class="box box-follow">
+                    <!--   .box-header   -->
+                    <div class="box-header with-border">
+                        <h3 class="box-title">已绑定角色</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i></button>
+                        </div>
+
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="roleOnMenuListTable"
+                               class="table dataTable table-striped row-border cell-border "
+                               cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>编码</th>
+                                <th>名称</th>
+                                <th>描述</th>
+                            </tr>
+                            </thead>
+                        </table>
+                        <!-- /.row -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6" style="padding-left: 0px; padding-right: 0px;">
+
+                <div class="box box-follow">
+                    <!--   .box-header   -->
+                    <div class="box-header with-border">
+                        <h3 class="box-title">未绑定角色</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i></button>
+                        </div>
+
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="roleNotOnMenuListTable"
+                               class="table dataTable table-striped row-border cell-border "
+                               cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>编码</th>
+                                <th>名称</th>
+                                <th>描述</th>
+                            </tr>
+                            </thead>
+                        </table>
+                        <!-- /.row -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="box box-follow">
+        <!--   .box-header   -->
+        <div class="box-header with-border">
+            <h3 class="box-title">组</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <!-- /.box-header -->
+
+        <div class="box-body form-horizontal">
+            <div class="col-md-6" style="padding-left: 0px;">
+
+                <div class="box box-follow">
+                    <!--   .box-header   -->
+                    <div class="box-header with-border">
+                        <h3 class="box-title">已绑定组</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i></button>
+                        </div>
+
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="groupOnMenuListTable"
+                               class="table dataTable table-striped row-border cell-border "
+                               cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>编码</th>
+                                <th>名称</th>
+                                <th>描述</th>
+                            </tr>
+                            </thead>
+                        </table>
+                        <!-- /.row -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6" style="padding-left: 0px; padding-right: 0px;">
+
+                <div class="box box-follow">
+                    <!--   .box-header   -->
+                    <div class="box-header with-border">
+                        <h3 class="box-title">未绑定组</h3>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i></button>
+                        </div>
+
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="groupNotOnMenuListTable"
+                               class="table dataTable table-striped row-border cell-border "
+                               cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>编码</th>
+                                <th>名称</th>
+                                <th>描述</th>
+                            </tr>
+                            </thead>
+                        </table>
+                        <!-- /.row -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+<script src="menu-assign.js"></script>

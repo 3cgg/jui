@@ -1,0 +1,85 @@
+<!-- Main content -->
+<section class="content" id="searchRuntimeUrlSection" ms-controller="runtimeurl_view">
+
+    <div class="box box-search">
+        <!-- form start -->
+        <div class="box-body">
+            <form class="form-horizontal" id="searchRuntimeUrlForm">
+                <div class="form-group">
+                    <label for="url" class="col-sm-1 control-label">地址</label>
+
+                    <div class="col-sm-5">
+                        <input type="text" name="url" class="form-control" id="url" placeholder="地址">
+                    </div>
+                    <label for="name" class="col-sm-1 control-label">名称</label>
+
+                    <div class="col-sm-5">
+                        <input type="text" name="name" class="form-control" id="name" placeholder="名称">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="desc" class="col-sm-1 control-label">描述</label>
+
+                    <div class="col-sm-11">
+                        <input type="text" name="desc" class="form-control" id="desc" placeholder="描述">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="desc" class="col-sm-1 control-label"></label>
+                    <div class="col-sm-2 col-lg-1">
+                        <input id="searchRuntimeUrlBtn" type="button" class="form-control btn-primary" value="查询">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- /.box -->
+
+
+    <div class="box box-result">
+        <!--   .box-header   -->
+        <div class="box-header with-border">
+
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table id="runtimeurlListTable"
+                   class="table dataTable row-border cell-border "
+                   cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>主键</th>
+                    <th>地址</th>
+                    <th>名称</th>
+                    <th>容器</th>
+                    <th>描述</th>
+                </tr>
+                </thead>
+            </table>
+
+
+            <table id="runtimeurlExtTable"
+                   class="table row-border cell-border "
+                   cellspacing="0" width="100%" style="display: none;">
+                <tr>
+                    <td width="100%">
+                        <form class="form-horizontal" id="runtimeUrlMockExtForm">
+                            <div class="form-group" style="width: 100%">
+                                <label for="desc" class="col-sm-1 control-label">MOCK</label>
+                                <div class="col-sm-11">
+                                    <input class=" minimal" name="mock" type="checkbox"></input>
+                                </div>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+            <!-- /.row -->
+        </div>
+    </div>
+
+</section>
+<script src="runtimeurl-list.js"></script>

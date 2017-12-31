@@ -1,0 +1,148 @@
+	 <!-- Main content -->
+    <section class="content"  id="editAlertItemSection"  ms-controller="alertItem_edit">
+    	<div class="box box-info">
+	        <div class="box-footer">
+	          <button type="submit" class="btn btn-primary"  id="editAlertItemBtn"  >提交</button>
+	          <button type="button" class="btn btn-primary"
+	          onclick='$(this).goView("/pages/alertmanager/alertitem-list.html");'
+	          >返回</button>
+	        </div> 
+      </div>
+    	
+    	<div class="box box-info">
+	    	<!--   .box-header   -->
+	        <div class="box-header with-border">
+	          <h3 class="box-title">修改</h3>
+	          <div class="box-tools pull-right">
+	          </div>
+	        </div>
+	        <!-- /.box-header -->
+	        
+	        <div class="box-body">
+	        <form role="form"  id="editAlertItemForm"  class="form-horizontal">
+              	<div class="form-group">
+              	
+              	   <label for="code" class="col-sm-1 control-label">编码</label>
+                   <div class="col-sm-5">
+                    <input id="code" name="code" ms-attr-value="data.code"   type="text"  class="form-control" >
+                  </div>
+              	  
+					
+              	
+              	   <label for="name" class="col-sm-1 control-label">名称</label>
+                   <div class="col-sm-5">
+                    <input id="name" name="name" ms-attr-value="data.name"   type="text"  class="form-control" >
+                  </div>
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="status" class="col-sm-1 control-label">状态</label>
+                   <div class="col-sm-5">
+                    <input id="status" name="status" ms-attr-value="data.status"   type="text"  class="form-control" >
+                  </div>
+              	  
+					
+              	
+              	   <label for="meta" class="col-sm-1 control-label">数据结构（元数据）</label>
+                   <div class="col-sm-5">
+                    <input id="meta" name="meta" ms-attr-value="data.meta"   type="text"  class="form-control" >
+                  </div>
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="description" class="col-sm-1 control-label">描述</label>
+                   <div class="col-sm-8">
+                    <textarea id="description" name="description" ms-attr-value="data.description"  class="form-control" rows="3" ></textarea>
+                  </div>
+              	  
+					
+              	
+              	  
+              	</div>
+					
+			
+			<input type="hidden"  name="id"  ms-attr-value="data.id"  />
+    		
+    		</form>
+	          <!-- /.row -->
+	        </div>
+      </div>
+      
+    
+    </section>
+	<script type="text/javascript">
+    
+    $_youapp.ready(function(){
+    	
+    	var page=$.extend({
+    		root:$("#editAlertItemSection"),
+    		model:{
+    			vm:avalon.define({
+    		        $id: "alertItem_edit",
+    		        data: {}
+    		    })
+    		}
+    	},$_youapp.pageTemplate);
+    	
+    	avalon.scan(page.root[0], page.model.vm);  // void braces
+    	
+    	function getId(){
+        	return page.root.getViewParam().id;
+        }
+    	
+    	page.ajaxGet({
+			  url:'/alertmanager/getAlertItemById',
+			  formData:{'id':getId()},
+			  success:function(data){
+				  page.model.vm.data=data;
+		  		  avalon.scan(page.root[0], page.model.vm);
+			  }
+		});
+    	
+    	page.root.find("#editAlertItemForm").validate({
+ 			rules: {
+				'code': {
+					   required: true,
+					   maxlength:64
+				   }
+				,
+				'name': {
+					   required: true,
+					   maxlength:64
+				   }
+				,
+				'status': {
+					   required: true,
+					   maxlength:64
+				   }
+				,
+				'meta': {
+					   required: true,
+					   maxlength:64
+				   }
+				,
+				'description': {
+					   required: false,
+					   maxlength:2000
+				   }
+ 			  },
+ 			  submitHandler:function(form){
+ 				  page.submitForm({
+ 					  url:'/alertmanager/updateAlertItem',
+ 					  formSelector:form,
+ 					  success:function(data){
+ 						  page.root.goView('/pages/alertmanager/alertitem-list.html');
+ 					  }
+ 					});
+ 			  
+ 			  } 
+ 		});
+    	page.root.find('#editAlertItemBtn').on('click',function(){
+			page.root.find("#editAlertItemForm").submit();
+		});
+    });
+    </script>

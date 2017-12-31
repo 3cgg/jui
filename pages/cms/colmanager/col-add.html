@@ -1,0 +1,106 @@
+	 <!-- Main content -->
+    <section class="content"  id="addColSection"   ms-controller="col_add">
+    
+    	<form role="form"  id="addColForm"  class="form-horizontal">
+    	
+    	<div class="box box-bys-btn">
+	        <div class="box-footer">
+	          <button type="submit" class="btn btn-primary btn-sm">提交</button>
+	          <button type="button" class="btn btn-primary btn-sm"
+	          onclick='$(this).goView("/pages/cms/colmanager/col-list.html");'
+	          >返回</button>
+				<div class="box-tools pull-right">
+					Col Add
+				</div>
+	        </div> 
+      </div>
+    	
+    	<div class="box box-bys-content">
+	    	<!--   .box-header   -->
+	        <!--<div class="box-header with-border">-->
+	          <!--<h3 class="box-title">Col Add</h3>-->
+	          <!--<div class="box-tools pull-right">-->
+	          <!--</div>-->
+	        <!--</div>-->
+	        <!-- /.box-header -->
+	        
+	        <div class="box-body">
+             <div class="form-group">
+                  <label for="code" class="col-sm-1 control-label requiredMask">编码</label>
+                  <div class="col-sm-5">
+				  <input name="code" type="text" class="form-control" placeholder=""  >
+				 </div>
+				 <label for="name" class="col-sm-1 control-label requiredMask">名称</label>
+				 <div class="col-sm-5">
+				  	<input name="name" type="text" class="form-control" placeholder=""  >
+	             </div>
+                </div>
+
+
+				<div class="form-group">
+					<label for="description" class="col-sm-1 control-label requiredMask">描述</label>
+					<div class="col-sm-11">
+						<textarea name="description" class="form-control" rows="3" placeholder=" ..."  ></textarea>
+					</div>
+				</div>
+
+                
+                <div class="form-group">
+                  <label for="sequence" class="col-sm-1 control-label requiredMask">顺序</label>
+                  <div class="col-sm-5">
+				  <input name="sequence" type="text" class="form-control"  value="0" placeholder=""  >
+				 </div>
+                </div>
+
+                <input  id="pid" type="hidden"  name="pid"  />
+	        </div>
+      </div>
+    </form>
+    
+    <div class="box box-follow"  id="parentColDiv" >
+	    	<!--   .box-header   -->
+	        <div class="box-header with-border">
+	          <h3 class="box-title">Parent</h3>
+	          <div class="box-tools pull-right">
+				  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+	          </div>
+	        </div>
+	        <!-- /.box-header -->
+	        
+	        <div class="box-body">
+             <div class="form-group">
+                  <label for="code" class="col-sm-1 control-label ">编码</label>
+                  <div class="col-sm-5">
+				  <span id="code"  class="form-control label-form-control">{{data.code}}</span>
+				 </div>
+				 <label for="name" class="col-sm-1 control-label requiredMask">名称</label>
+				 <div class="col-sm-5">
+				    <span id="name"  class="form-control label-form-control">{{data.name}}</span>
+	             </div>
+                </div>
+
+				<div class="form-group">
+					<label for="description" class="col-sm-1 control-label requiredMask">描述</label>
+					<div class="col-sm-11">
+						<span id="description"  class="form-control label-form-control">{{data.description}}</span>
+					</div>
+				</div>
+
+                <div class="form-group">
+                  <label for="sequence" class="col-sm-1 control-label ">顺序</label>
+                  <div class="col-sm-5">
+                  <span id="sequence"  class="form-control label-form-control">{{data.sequence}}</span>
+				 </div>
+                </div>
+                
+
+                
+	        </div>
+      </div>
+    
+    </section>
+	
+	
+	<script src="col-add.js"></script>
+
+

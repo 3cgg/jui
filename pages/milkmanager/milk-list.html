@@ -1,0 +1,208 @@
+	 <!-- Main content -->
+    <section class="content"   id="searchMilkSection"   ms-controller="milk_view">
+      
+      <div class="box box-search">
+      	<!--<div class="box-header with-border">-->
+          <!--<h3 class="box-title"></h3>-->
+          <!--<div class="box-tools pull-right">-->
+            <!--<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>-->
+          <!--</div>-->
+        <!--</div>-->
+              <div class="box-body">
+              <form class="form-horizontal"  id="searchMilkForm">
+              	
+              	<div class="form-group">
+              	
+              	   <label for="amount" class="col-sm-1 control-label">喝奶量</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="amount" class="form-control" id="amount">
+                  </div>
+              	  
+					
+              	
+              	   <label for="time" class="col-sm-1 control-label">喝奶时间</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="time" class="form-control" id="time">
+                  </div>
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="timeStart" class="col-sm-1 control-label">timeStart</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="timeStart" class="form-control" id="timeStart">
+                  </div>
+              	  
+					
+              	
+              	   <label for="timeEnd" class="col-sm-1 control-label">timeEnd</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="timeEnd" class="form-control" id="timeEnd">
+                  </div>
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="age" class="col-sm-1 control-label">年龄</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="age" class="form-control" id="age">
+                  </div>
+              	  
+					
+              	
+              	   <label for="log" class="col-sm-1 control-label">奶粉品牌</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="log" class="form-control" id="log">
+                  </div>
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="createTimeStart" class="col-sm-1 control-label">创建时间（起）</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="createTimeStart" class="form-control" id="createTimeStart">
+                  </div>
+              	  
+					
+              	
+              	   <label for="createTimeEnd" class="col-sm-1 control-label">创建时间（止）</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="createTimeEnd" class="form-control" id="createTimeEnd">
+                  </div>
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="updateTimeStart" class="col-sm-1 control-label">更新时间（起）</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="updateTimeStart" class="form-control" id="updateTimeStart">
+                  </div>
+              	  
+					
+              	
+              	   <label for="updateTimeEnd" class="col-sm-1 control-label">更新时间（止）</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="updateTimeEnd" class="form-control" id="updateTimeEnd">
+                  </div>
+              	  
+              	</div>
+					
+				<div class="form-group">
+                	<label for="searchMilkBtn" class="col-sm-1 control-label"></label>
+                	<div class="col-sm-2 col-lg-1">
+	                	<input id="searchMilkBtn" type="button" class="form-control btn-primary"  value="查询"   >
+	                </div>
+                </div>
+                </form>
+              </div>
+          </div>
+          <!-- /.box -->
+      
+    	
+    	<div class="box box-result">
+	    	<!--   .box-header   -->
+	        <div class="box-header with-border">
+	          <button type="submit" class="btn btn-primary btn-sm"
+	          onclick='$(this).goView("/pages/milkmanager/milk-add.html");'
+	          >新增</button>
+	          <div class="box-tools pull-right">
+	            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+	          </div>
+	          
+	        </div>
+	        <!-- /.box-header -->
+	        <div class="box-body" >
+	          <table id="milkListTable" 
+	          		class="" 
+	          			cellspacing="0" width="100%">
+	            <thead>
+					<tr>
+		              	<th></th>
+						
+						<th>喝奶量</th>
+						<th>喝奶时间</th>
+						<th>年龄</th>
+						<th>奶粉品牌</th>
+						<th></th>
+					</tr>
+				</thead>
+            </table>
+	          
+	          
+	          <!-- /.row -->
+	        </div>
+      </div>
+    
+    </section>
+    <script type="text/javascript">
+    $_youapp.ready(function() {
+    	
+    	var page=$.extend({
+    		root:$("#searchMilkSection"),
+    		model:{
+    			vm:avalon.define({
+    		        $id: "milk_view",
+    		        data: {}
+    		    })
+    		}
+    	},$_youapp.pageTemplate);
+    	
+    	page.listTable=page.root.find('#milkListTable').initDataTable({
+			url:"/milkmanager/getMilksByPage",
+			urlDataFn:function(){
+				return page.root.find("#searchMilkForm").serializeObj();
+			},
+			lengthChange:false,
+			checkbox:true,
+			ops:{
+				view:function(id,rowData){
+                    page.root.find('#milkListTable').goView('/pages/milkmanager/milk-view.html',{"id":id});
+				},
+				edit:function(id,rowData){
+					page.root.find('#milkListTable').goView('/pages/milkmanager/milk-edit.html',{"id":id});
+				},
+				del:function(id,rowData){
+					page.ajaxGet({
+						  url:'/milkmanager/deleteMilkById',
+						  formData:{'id':id},
+						  success:function(data){
+							  page.listTable.ajax.reload();
+						  }
+						});
+				}
+			},
+			columns : [
+			
+			{
+				"data" : "amount",
+				"width": "10%"
+			}
+			,
+			{
+				"data" : "time",
+				"width": "10%"
+			}
+			,
+			{
+				"data" : "age",
+				"width": "10%"
+			}
+			,
+			{
+				"data" : "log",
+				"width": "10%"
+			}
+			]
+		});
+		
+		page.root.find("#searchMilkBtn").on("click",function(){
+			page.listTable.ajax.reload();
+		})
+		
+	});
+	</script>
+

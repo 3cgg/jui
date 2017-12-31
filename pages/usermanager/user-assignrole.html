@@ -1,0 +1,111 @@
+<!-- Main content -->
+<section class="content" id="assignRoleOnUserSection" ms-controller="user_view">
+
+    <div class="box box-info">
+        <div class="box-footer">
+            <button type="button" class="btn btn-primary"
+                    onclick='$(this).goView("/pages/usermanager/user-list.html");'
+            >返回
+            </button>
+        </div>
+    </div>
+
+    <div class="box box-info">
+        <!--   .box-header   -->
+        <div class="box-header with-border">
+            <h3 class="box-title">用户信息明细</h3>
+            <div class="box-tools pull-right">
+            </div>
+        </div>
+        <!-- /.box-header -->
+
+        <div class="box-body  form-horizontal">
+            <div class="form-group">
+                <label for="userName" class="col-sm-1 control-label">用户名</label>
+                <div class="col-sm-5">
+                    <span id="userName" class="form-control label-form-control">{{data.userName}}</span>
+                </div>
+                <label for="natureName" class="col-sm-1 control-label">昵称</label>
+                <div class="col-sm-5">
+                    <span id="natureName" class="form-control label-form-control">{{data.natureName}}</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="statusName" class="col-sm-1 control-label">状态</label>
+                <div class="col-sm-5">
+                    <span id="statusName"
+                          class="form-control label-form-control">{{data.status}}({{data.statusName}})</span>
+                </div>
+                <label for="registerTime" class="col-sm-1 control-label">注册时间</label>
+                <div class="col-sm-5">
+                    <span id="registerTime" class="form-control label-form-control">{{data.registerTime}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6" style="padding-left: 0px;">
+
+        <div class="box box-info">
+            <!--   .box-header   -->
+            <div class="box-header with-border">
+                <h3 class="box-title">已绑定角色</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                </div>
+
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="roleOnUserListTable"
+                       class="table dataTable table-striped row-border cell-border "
+                       cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>编码</th>
+                        <th>名称</th>
+                        <th>描述</th>
+                    </tr>
+                    </thead>
+                </table>
+                <!-- /.row -->
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6" style="padding-left: 0px; padding-right: 0px;">
+
+        <div class="box box-info">
+            <!--   .box-header   -->
+            <div class="box-header with-border">
+                <h3 class="box-title">未绑定角色</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                </div>
+
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="roleNotOnUserListTable"
+                       class="table dataTable table-striped row-border cell-border "
+                       cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>编码</th>
+                        <th>名称</th>
+                        <th>描述</th>
+                    </tr>
+                    </thead>
+                </table>
+                <!-- /.row -->
+            </div>
+        </div>
+    </div>
+
+</section>
+<script src="user-assignrole.js"></script>

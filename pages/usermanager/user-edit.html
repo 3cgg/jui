@@ -1,0 +1,57 @@
+<!-- Main content -->
+<section class="content" id="editUserSection" ms-controller="user_edit">
+
+    <form role="form" id="editUserForm" class="form-horizontal">
+
+        <div class="box box-bys-btn">
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary btn-sm">提交</button>
+                <button type="button" class="btn btn-primary btn-sm"
+                        onclick='$(this).goView("/pages/usermanager/user-list.html");'
+                >返回
+                </button>
+                <div class="box-tools pull-right">
+                    用户修改
+                </div>
+            </div>
+        </div>
+
+        <div class="box box-bys-content">
+            <!--   .box-header   -->
+            <!--<div class="box-header with-border">-->
+            <!--<h3 class="box-title">用户修改</h3>-->
+            <!--<div class="box-tools pull-right">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!-- /.box-header -->
+
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="userName" class="col-sm-1 control-label">用户名</label>
+                    <div class="col-sm-5">
+                        <span id="userName" class="form-control label-form-control">{{data.userName}}</span>
+                    </div>
+                    <label for="natureName" class="col-sm-1 control-label requiredMask">昵称</label>
+                    <div class="col-sm-5">
+                        <input id="natureName" name="natureName" type="text" class="form-control" placeholder=""
+                               ms-attr-value="data.natureName">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="statusName" class="col-sm-1 control-label">状态</label>
+                    <div class="col-sm-5">
+                        <span id="statusName" class="form-control label-form-control">{{data.status}}({{data.statusName}})</span>
+                    </div>
+                    <label for="registerTime" class="col-sm-1 control-label">注册时间</label>
+                    <div class="col-sm-5">
+                        <span id="registerTime" class="form-control label-form-control">{{data.registerTime}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" name="id" ms-attr-value="data.id"/>
+    </form>
+
+</section>
+<script src="user-edit.js"></script>

@@ -1,0 +1,42 @@
+
+<style type="text/css">
+	@media only screen and (min-width: 20em) {
+		#layoutTab .tabul{
+			overflow: hidden;
+		}
+	}
+
+
+</style>
+
+<div id="layoutTab"  class="tabuloustab"
+data-layoutFor="contentContent" 
+data-layoutId="layoutTab"   
+data-top="120"
+data-height="cal"
+data-slicetop="5"
+ >
+	<ul class="nav nav-tabs  tabul"  id="tabMenu"  style="padding-left:0px;height: 53px;">
+		<li id="quicktaskli"><a href="#quicktask" title="QuickTask"  id="quicktask">QuickTask</a></li>
+		<li id="timelineli"><a href="#timeline" title="Timeline"  id="timeline">Timeline</a></li>
+	</ul>
+	<div class="tabcontainer"  style="height: 100% "  id="tabContainer">
+		<div id="quicktask">
+			<!--tab content-->
+			<div data-layoutId="tabQuicktask"   
+					data-htmlUrl="pages/quicktask/quicktask.html"   style="height: auto;"></div>
+		</div>
+		<!-- -->
+		<div id="timeline">
+			<div data-layoutId="tabTimeline"   
+					data-htmlUrl="pages/timeline.html"   style="height: auto;"></div>
+		</div>
+		 
+	</div>
+	<!--End tabs container-->
+</div>
+
+<script src="layout-tab.js"></script>
+
+
+

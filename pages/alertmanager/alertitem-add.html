@@ -1,0 +1,128 @@
+	 <!-- Main content -->
+    <section class="content"  id="addAlertItemSection" >
+    	<div class="box box-info">
+	        <div class="box-footer">
+	          <button type="button" class="btn btn-primary"  id="addAlertItemBtn" >提交</button>
+	          <button type="button" class="btn btn-primary"
+	          onclick='$(this).goView("/pages/alertmanager/alertitem-list.html");'
+	          >返回</button>
+	        </div> 
+      </div>
+    	
+    	<div class="box box-info">
+	    	<!--   .box-header   -->
+	        <div class="box-header with-border">
+	          <h3 class="box-title">新增</h3>
+	          <div class="box-tools pull-right">
+	          </div>
+	        </div>
+	        <!-- /.box-header -->
+	        
+	        <div class="box-body">
+	        
+	        <form role="form"  id="addAlertItemForm"  class="form-horizontal">
+              	<div class="form-group">
+              	
+              	   <label for="code" class="col-sm-1 control-label">编码</label>
+                   <div class="col-sm-5">
+                    <input  id="code" name="code" type="text" class="form-control"></input>
+                  </div>
+              	  
+					
+              	
+              	   <label for="name" class="col-sm-1 control-label">名称</label>
+                   <div class="col-sm-5">
+                    <input  id="name" name="name" type="text" class="form-control"></input>
+                  </div>
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="status" class="col-sm-1 control-label">状态</label>
+                   <div class="col-sm-5">
+                    <input  id="status" name="status" type="text" class="form-control"></input>
+                  </div>
+              	  
+					
+              	
+              	   <label for="meta" class="col-sm-1 control-label">数据结构（元数据）</label>
+                   <div class="col-sm-5">
+                    <input  id="meta" name="meta" type="text" class="form-control"></input>
+                  </div>
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="description" class="col-sm-1 control-label">描述</label>
+                   <div class="col-sm-8">
+                    <textarea  id="description" name="description" class="form-control" rows="3" ></textarea>
+                  </div>
+              	  
+					
+              	
+              	  
+              	</div>
+					
+    		</form>
+	          <!-- /.row -->
+	        </div>
+      </div>
+    </section>
+	
+	
+	<script type="text/javascript">
+		
+		$_youapp.ready(function (){
+			
+			var page=$.extend({
+	    		root:$("#addAlertItemSection"),
+	    		model:{
+	    		}
+	    	},$_youapp.pageTemplate);
+			
+			page.root.find("#addAlertItemForm").validate({
+					rules: {
+						'code': {
+							   required: true,
+							   maxlength:64
+						   }
+						,
+						'name': {
+							   required: true,
+							   maxlength:64
+						   }
+						,
+						'status': {
+							   required: true,
+							   maxlength:64
+						   }
+						,
+						'meta': {
+							   required: true,
+							   maxlength:64
+						   }
+						,
+						'description': {
+							   required: false,
+							   maxlength:2000
+						   }
+					  },
+					  submitHandler:function(form){
+						  page.submitForm({
+							  url:'/alertmanager/saveAlertItem',
+							  formSelector:form,
+							  success:function(data){
+								  page.root.goView('/pages/alertmanager/alertitem-list.html');
+							  }
+							});
+					 }
+				});
+			page.root.find('#addAlertItemBtn').on('click',function(){
+				page.root.find("#addAlertItemForm").submit();
+			});	
+		});
+	</script>
+
+

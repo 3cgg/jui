@@ -1,0 +1,111 @@
+	 <!-- Main content -->
+    <section class="content"   id="viewBillSection"   ms-controller="bill_view">
+    
+    	<div class="box box-info">
+	        <div class="box-footer">
+	          <button type="button" class="btn btn-primary"
+	          onclick='$(this).goView("/pages/billmanager/bill-list.html");'
+	          >返回</button>
+	        </div> 
+      </div>
+    	
+    	<div class="box box-info">
+	    	<!--   .box-header   -->
+	        <div class="box-header with-border">
+	          <h3 class="box-title">账单信息明细</h3>
+	          <div class="box-tools pull-right">
+	          </div>
+	        </div>
+	        <!-- /.box-header -->
+	        
+	        <div class="box-body form-horizontal">
+	        	<div class="form-group">
+                  <label for="billName" class="col-sm-1 control-label">账单名称</label>
+                  <div class="col-sm-5">
+				  <span id="billName"  class="form-control label-form-control">{{data.billName}}</span>
+				 </div>
+				  <label for="billType" class="col-sm-1 control-label">账单类型</label>
+				  <div class="col-sm-5">
+				  	<span id=billType  class="form-control label-form-control" >{{data.billType}}</span>		
+                 </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="money" class="col-sm-1 control-label">Money</label>
+                  <div class="col-sm-5">
+				  <span id="money"  class="form-control label-form-control">{{data.money}}</span>
+				 </div>
+				  <label for="billTime" class="col-sm-1 control-label">Bill Time</label>
+				  <div class="col-sm-5">
+				  	<span id=billTime  class="form-control label-form-control" >{{data.billTime}}</span>		
+                 </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="mallName" class="col-sm-1 control-label">地址</label>
+                  <div class="col-sm-5">
+				  <span id="mallName"  class="form-control label-form-control">{{data.mallName}}</span>
+				 </div>
+				  <label for="description" class="col-sm-1 control-label">描述</label>
+				  <div class="col-sm-5">
+				  	<span id="description"  class="form-control label-form-control" >{{data.description}}</span>		
+                 </div>
+                </div>
+                
+	        </div>
+      </div>
+      
+      <div class="box box-info">
+	    	<!--   .box-header   -->
+	        <div class="box-header with-border">
+	          <h3 class="box-title">商品</h3>
+	          <div class="box-tools pull-right">
+	          </div>
+	        </div>
+	        <!-- /.box-header -->
+	        
+	        <div class="box-body form-horizontal">
+		      <div data-layoutId="billGoodContent"   data-htmlUrl="/pages/billmanager/good-pt.html"  id="billGoodContentLayoutDiv">
+			
+			  </div>
+		   </div>
+		  </div>
+    </section>
+    <script type="text/javascript">
+    
+    $_youapp.ready(function(){
+    	
+    	var page=$.extend({
+    		root:$("#viewBillSection"),
+    		comp:"",
+    		model:{
+    			vm:avalon.define({
+    		        $id: "bill_view",
+    		        data: {}
+    		    })
+    		}
+    	},$_youapp.pageTemplate);
+    	
+    	avalon.scan(page.root[0], page.model.vm);  // void braces
+    	
+    	function getId(){
+        	return page.root.getViewParam().id;
+        	//return "71fbb5bd5de84f01bcc22b6e8a3e4ead";
+        }
+    	
+    	page.ajaxGet({
+			  url:page.comp+'/bill/billmanager/getBillById',
+			  formData:{'id':getId()},
+			  success:function(data){
+				  page.model.vm.data=data;
+		  		  avalon.scan(page.root[0], page.model.vm);
+			  }
+			});
+	
+    	page.root.find('#billGoodContentLayoutDiv').setView('/pages/billmanager/good-part-list.html',{"id":getId()});
+		
+    
+    });
+    </script>
+	
+

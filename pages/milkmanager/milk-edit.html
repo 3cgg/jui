@@ -1,0 +1,130 @@
+	 <!-- Main content -->
+    <section class="content"  id="editMilkSection"  ms-controller="milk_edit">
+    	<div class="box box-info">
+	        <div class="box-footer">
+	          <button type="submit" class="btn btn-primary"  id="editMilkBtn"  >提交</button>
+	          <button type="button" class="btn btn-primary"
+	          onclick='$(this).goView("/pages/milkmanager/milk-list.html");'
+	          >返回</button>
+	        </div> 
+      </div>
+    	
+    	<div class="box box-info">
+	    	<!--   .box-header   -->
+	        <div class="box-header with-border">
+	          <h3 class="box-title">修改</h3>
+	          <div class="box-tools pull-right">
+	          </div>
+	        </div>
+	        <!-- /.box-header -->
+	        
+	        <div class="box-body">
+	        <form role="form"  id="editMilkForm"  class="form-horizontal">
+              	<div class="form-group">
+              	
+              	   <label for="amount" class="col-sm-1 control-label">喝奶量</label>
+                   <div class="col-sm-5">
+                    <input id="amount" name="amount" ms-attr-value="data.amount"   type="text"  class="form-control" >
+                  </div>
+              	  
+					
+              	
+              	   <label for="time" class="col-sm-1 control-label">喝奶时间</label>
+                   <div class="col-sm-5">
+                  </div>
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="age" class="col-sm-1 control-label">年龄</label>
+                   <div class="col-sm-5">
+                    <input id="age" name="age" ms-attr-value="data.age"   type="text"  class="form-control" >
+                  </div>
+              	  
+					
+              	
+              	   <label for="log" class="col-sm-1 control-label">奶粉品牌</label>
+                   <div class="col-sm-5">
+                    <input id="log" name="log" ms-attr-value="data.log"   type="text"  class="form-control" >
+                  </div>
+              	  
+              	</div>
+					
+			
+			<input type="hidden"  name="id"  ms-attr-value="data.id"  />
+    		
+    		</form>
+	          <!-- /.row -->
+	        </div>
+      </div>
+      
+    
+    </section>
+	<script type="text/javascript">
+    
+    $_youapp.ready(function(){
+    	
+    	var page=$.extend({
+    		root:$("#editMilkSection"),
+    		model:{
+    			vm:avalon.define({
+    		        $id: "milk_edit",
+    		        data: {}
+    		    })
+    		}
+    	},$_youapp.pageTemplate);
+    	
+    	avalon.scan(page.root[0], page.model.vm);  // void braces
+    	
+    	function getId(){
+        	return page.root.getViewParam().id;
+        }
+    	
+    	page.ajaxGet({
+			  url:'/milkmanager/getMilkById',
+			  formData:{'id':getId()},
+			  success:function(data){
+				  page.model.vm.data=data;
+		  		  avalon.scan(page.root[0], page.model.vm);
+			  }
+		});
+    	
+    	page.root.find("#editMilkForm").validate({
+ 			rules: {
+				'amount': {
+					   required: true,
+					   maxlength:64
+				   }
+				,
+				'time': {
+					   required: true,
+					   maxlength:64
+				   }
+				,
+				'age': {
+					   required: true,
+					   maxlength:64
+				   }
+				,
+				'log': {
+					   required: true,
+					   maxlength:64
+				   }
+ 			  },
+ 			  submitHandler:function(form){
+ 				  page.submitForm({
+ 					  url:'/milkmanager/updateMilk',
+ 					  formSelector:form,
+ 					  success:function(data){
+ 						  page.root.goView('/pages/milkmanager/milk-list.html');
+ 					  }
+ 					});
+ 			  
+ 			  } 
+ 		});
+    	page.root.find('#editMilkBtn').on('click',function(){
+			page.root.find("#editMilkForm").submit();
+		});
+    });
+    </script>

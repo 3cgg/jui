@@ -1,0 +1,103 @@
+	 <!-- Main content -->
+    <section class="content"   id="deployContainerSection"   ms-controller="container_view">
+	      
+	      <div class="box box-info">
+	        <div class="box-footer">
+	        <button type="button" class="btn btn-primary"  id="deployJarBtn"
+	          >部署</button>
+	        <button type="button" class="btn btn-primary"  id="deployJarOverrideBtn"
+	          >强制部署</button>  
+	          <button type="button" class="btn btn-primary" 
+	          onclick='$(this).goView("/pages/containermanager/container-list.html");'
+	          >返回</button>
+	        </div> 
+      </div>
+	      
+	      
+	      <div class="box box-info">
+	        <div class="box-body">
+	        	<div id="uploader" class="webfileUploader" >
+	                <div class="queueList">
+	                    <div id="uploader_dndArea" class="placeholder">
+	                        <div id="uploader_filePicker">ss</div>
+	                        <p>选择需要部署的应用（JAR）</p>
+	                    </div>
+	                </div>
+	                <div class="statusBar" style="display:none;">
+	                    <div class="progress">
+	                        <span class="text">0%</span>
+	                        <span class="percentage"></span>
+	                    </div><div class="info"></div>
+	                    <div class="btns">
+	                        <div id="uploader_filePicker2"  class="webfileUploaderFilePick2"></div><div class="uploadBtn">开始上传</div>
+	                    </div>
+	                </div>
+            	</div>
+	        </div>
+	      </div>  
+    </section>
+	
+	<script type="text/javascript">
+	$_youapp.ready(function(){
+		
+		
+		var page=$.extend({
+    		root:$("#deployContainerSection"),
+    		model:{
+    			vm:avalon.define({
+    		        $id: "container_view",
+    		        data: {}
+    		    })
+    		}
+    	},$_youapp.pageTemplate);
+		
+		page.root.find('#uploader').initUploader({
+			uploaderId :"uploader",
+			addBtnId:"uploader_filePicker",
+			addMoreBtnId:"uploader_filePicker2",
+			dndAreaId:"uploader_dndArea",
+			server:$_youapp.$_config.getFileUploaderEndpoint()
+		});
+		
+		
+		function valid(ids){
+			if(ids&&ids.length==0){
+				page.warning('请上传文件');
+				return false;
+			}
+			if(ids&&ids.length>1){
+				page.warning('只能上传一个文件');
+				return false;
+			}
+			return true;
+		}
+		
+		page.root.find('#deployJarBtn').on('click',function(event){
+			var files=page.root.find('#uploader').uploadfiles().val();
+			if(valid(files)){
+				page.ajaxPost({
+					  url:'/containermanager/deployJar',
+					  formData:{'jarUri':files[0].value.data.fileUrl,override:false},
+					  success:function(data){
+						  page.root.goView("/pages/containermanager/container-list.html");
+					  }
+					});
+			}
+		});
+		page.root.find('#deployJarOverrideBtn').on('click',function(event){
+			var files=page.root.find('#uploader').uploadfiles().val();
+			if(valid(files)){
+				page.ajaxPost({
+					  url:'/containermanager/deployJar',
+					  formData:{'jarUri':files[0].value.data.fileUrl,override:true},
+					  success:function(data){
+						  page.root.goView("/pages/containermanager/container-list.html");
+					  }
+					});
+			}
+		});
+		
+	});
+	</script>
+
+

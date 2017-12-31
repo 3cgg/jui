@@ -1,0 +1,153 @@
+	 <!-- Main content -->
+    <section class="content"   id="viewContainerSection"   ms-controller="container_view">
+    
+    	<div class="box box-info">
+	        <div class="box-footer">
+	          <button type="button" class="btn btn-primary" 
+	          onclick='$(this).goView("/pages/containermanager/container-list.html");'
+	          >返回</button>
+	        </div> 
+      </div>
+    	
+    	<div class="box box-info">
+	    	<!--   .box-header   -->
+	        <div class="box-header with-border">
+	          <h3 class="box-title">应用信息明细</h3>
+	          <div class="box-tools pull-right">
+	          </div>
+	        </div>
+	        <!-- /.box-header -->
+	        
+	        <div class="box-body  form-horizontal" >
+	        	<div class="form-group">
+                  <label for="appName" class="col-sm-1 control-label">应用名</label>
+                  <div class="col-sm-5">
+				  <span id="appName"  class="form-control label-form-control">{{data.appName}}</span>
+				 </div>
+				  <label for="appUnique" class="col-sm-1 control-label">应用编码</label>
+				  <div class="col-sm-5">
+				  	<span id="appUnique"  class="form-control label-form-control" >{{data.appUnique}}</span>		
+                 </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="appCompName" class="col-sm-1 control-label">组件名</label>
+                  <div class="col-sm-5">
+				  <span id="appCompName"  class="form-control label-form-control">{{data.appCompName}}</span>
+				 </div>
+				  <label for="appVersion" class="col-sm-1 control-label">版本</label>
+				  <div class="col-sm-5">
+				  	<span id="appVersion"  class="form-control label-form-control" >{{data.appVersion}}</span>		
+                 </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="appActive" class="col-sm-1 control-label">状态</label>
+                  <div class="col-sm-5">
+                  	<span id="appActive"  class="form-control label-form-control">{{data.appActive}}({{data.statusName}})</span>
+                  </div>
+                  <label for="appHost" class="col-sm-1 control-label">应用地址</label>
+                  <div class="col-sm-5">
+                  	<span id="appHost"  class="form-control label-form-control">{{data.appHost}}</span>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="appDesc" class="col-sm-1 control-label">描述</label>
+                  <div class="col-sm-5">
+                  	<span id="appDesc"  class="form-control label-form-control">{{data.appDesc}}</span>
+                  </div>
+				  
+                </div>
+	        </div>
+      </div>
+      
+      
+      <div class="box box-info">
+	    	<!--   .box-header   -->
+	        <div class="box-header with-border">
+			  <h3 class="box-title">资源集</h3>	          
+	          <div class="box-tools pull-right">
+	            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+	          </div>
+	          
+	        </div>
+	        <!-- /.box-header -->
+	        <div class="box-body" >
+	          <table id="urlMappingListTable" 
+	          		class="table dataTable table-striped row-border cell-border " 
+	          			cellspacing="0" width="100%">
+	            <thead>
+					<tr>
+						<th>主键</th>
+						<th>URL</th>
+						<th>是否激活</th>
+						<th>描述</th>
+					</tr>
+				</thead>
+            </table>
+	          <!-- /.row -->
+	        </div>
+      </div>
+      
+    </section>
+    <script type="text/javascript">
+    
+    $_youapp.ready(function(){
+    	
+    	var page=$.extend({
+    		root:$("#viewContainerSection"),
+    		model:{
+    			vm:avalon.define({
+    		        $id: "container_view",
+    		        data: {}
+    		    })
+    		}
+    	},$_youapp.pageTemplate);
+    	
+    	avalon.scan(page.root[0], page.model.vm);  // void braces
+    	
+    	function getId(){
+        	return page.root.getViewParam().id;
+        }
+    	
+    	page.ajaxGet({
+			  url:'/containermanager/getAppMetaByAppId',
+			  formData:{'id':getId()},
+			  success:function(data){
+				  page.model.vm.data=data;
+		  		  avalon.scan(page.root[0], page.model.vm);
+			  }
+			});
+    	
+    	page.listTable=page.root.find('#urlMappingListTable').initDataTable({
+			url:"/containermanager/getURLMappingMetasByPage",
+			urlDataFn:function(){
+				return {'appId':getId()};
+			},
+			paging:false,
+			columns : [ 
+			{
+				"data" : "id",
+				"orderable" : false,
+				 "width": "10%"
+			}, 
+			{
+				"data" : "url",
+				"width": "10%"
+			},
+			{
+				"data" : "urlActive",
+				"width": "10%"
+			}, 
+			{
+				"data" : "urlDesc",
+				"width": "20%"
+			}
+			
+			]
+		});
+    });
+    </script>
+	
+

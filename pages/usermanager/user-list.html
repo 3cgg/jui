@@ -1,0 +1,104 @@
+<!-- Main content -->
+<section class="content" id="searchUserSection" ms-controller="user_view">
+
+    <div class="box box-search">
+        <!--<div class="box-header with-border">-->
+        <!--<h3 class="box-title"></h3>-->
+        <!--<div class="box-tools pull-right">-->
+        <!--<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>-->
+        <!--</div>-->
+        <!--</div>-->
+        <div class="box-body">
+            <form class="form-horizontal" id="searchUserForm">
+                <div class="form-group">
+                    <label for="userName" class="col-sm-1 control-label">用户名</label>
+                    <div class="col-sm-5">
+                        <input type="text" name="userName" class="form-control" id="userName" placeholder="用户名">
+                    </div>
+
+                    <label for="natureName" class="col-sm-1 control-label">昵称</label>
+                    <div class="col-sm-5">
+                        <input type="text" name="natureName" class="form-control" id="natureName" placeholder="昵称">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerTimeStart" class="col-sm-1 control-label">注册时间（起）</label>
+                    <div class="col-sm-5">
+                        <input type="text" name="registerTimeStart" class="form-control" id="registerTimeStart"
+                               placeholder="">
+                    </div>
+
+                    <label for="registerTimeEnd" class="col-sm-1 control-label">注册时间（止）</label>
+                    <div class="col-sm-5">
+                        <input type="text" name="registerTimeEnd" class="form-control" id="registerTimeEnd"
+                               placeholder="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="status" class="col-sm-1 control-label">状态</label>
+                    <div class="col-sm-5">
+                        <select id="status" name="status" class="form-control select2 codetable"
+                                data-codeType="USER_STATUS" data-codeAlter>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="searchUserBtn" class="col-sm-1 control-label"></label>
+                    <div class="col-sm-2 col-lg-1">
+                        <input id="searchUserBtn" type="button" class="form-control btn-primary " value="查询">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- /.box -->
+
+
+    <div class="box box-result ">
+        <!--   .box-header   -->
+        <div class="box-header with-border">
+            <button type="button" class="btn btn-primary btn-sm"
+                    onclick='$(this).goView("/pages/usermanager/user-add.html");'
+            >新增
+            </button>
+            <button type="button" class="btn btn-primary btn-sm" id="toAssignRoleBtn"
+            >分配角色
+            </button>
+            <button type="button" class="btn btn-primary btn-sm" id="toAssignGroupBtn"
+            >分配组
+            </button>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+            </div>
+
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table id="userListTable"
+                   class="table dataTable table-striped row-border cell-border "
+                   cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>No.</th>
+                    <th>主键</th>
+                    <th>用户名</th>
+                    <th>昵称</th>
+                    <th>状态</th>
+                    <th>注册时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+            </table>
+
+
+            <!-- /.row -->
+        </div>
+    </div>
+
+</section>
+<script src="user-list.js"></script>

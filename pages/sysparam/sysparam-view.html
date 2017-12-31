@@ -1,0 +1,49 @@
+<!-- Main content -->
+<section class="content" id="viewSysParamSection" ms-controller="sysparam_view">
+
+    <div class="box box-bys-btn">
+        <div class="box-footer">
+            <button type="button" class="btn btn-primary btn-sm"
+                    onclick='$(this).goView("/pages/sysparam/sysparam-list.html");'
+            >返回
+            </button>
+            <div class="box-tools pull-right">
+                参数信息明细
+            </div>
+        </div>
+    </div>
+
+    <div class="box box-bys-content">
+        <!--   .box-header   -->
+        <!--<div class="box-header with-border">-->
+        <!--<h3 class="box-title">参数信息明细</h3>-->
+        <!--<div class="box-tools pull-right">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!-- /.box-header -->
+
+        <div class="box-body form-horizontal">
+            <div class="form-group">
+                <label for="code" class="col-sm-1 control-label">编码</label>
+                <div class="col-sm-5">
+                    <span id="code" class="form-control label-form-control">{{data.code}}</span>
+                </div>
+                <label for="value" class="col-sm-1 control-label">参数值</label>
+                <div class="col-sm-5">
+                    <span id=value class="form-control label-form-control">{{data.value}}</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="desc" class="col-sm-1 control-label">详情描述</label>
+                <div class="col-sm-5">
+                    <span id="desc" class="form-control label-form-control">{{data.desc}}</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<script src="sysparam-view.js"></script>
+	
+

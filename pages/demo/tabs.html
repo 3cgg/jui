@@ -1,0 +1,100 @@
+<!--   height is cal , then the tab calculate height $(window).height()-'data-top';
+	if the data property is remove, then auto use the children element height
+-->
+<div id="layoutTabDemo" class="tabuloustab"
+>
+    <ul class="nav nav-tabs  tabul" id="tabMenuDemo"
+        style="
+    background-color: #e1daf1;
+    border-style: solid;
+    border-color: #e1daf1;
+	"
+    >
+        <li><a href="#tabs-1" title="">Tab1</a></li>
+        <li><a href="#tabs-2" title="">Tab 2</a></li>
+        <li><a href="#tabs-3" title="">Tab 3</a></li>
+    </ul>
+    <div class="tabcontainer" style="
+	border-width: 0px 1px 1px;
+	border-style: solid;
+	border-color: #e1daf1;
+	"
+         id="tabContainerDemo"
+    >
+        <div id="tabs-1">
+            <!--tab content-->
+            Tab1
+        </div>
+        <div id="tabs-2">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title"></h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <form class="form-horizontal" id="searchSysParamForm">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="code" class="col-sm-1 control-label">编码</label>
+
+                            <div class="col-sm-5">
+                                <input type="text" name="code" class="form-control" id="code" placeholder="编码">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="tabs-3">
+            <!--tab content-->
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title"></h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                class="fa fa-minus"></i></button>
+                    </div>
+                </div>
+                <form class="form-horizontal" id="searchSysParamForm">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="code" class="col-sm-1 control-label">编码</label>
+
+                            <div class="col-sm-5">
+                                <input type="text" name="code" class="form-control" id="code" placeholder="编码">
+                            </div>
+                            <label for="value" class="col-sm-1 control-label">参数值</label>
+
+                            <div class="col-sm-5">
+                                <input type="text" name="value" class="form-control" id="value" placeholder="参数值">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="desc" class="col-sm-1 control-label">详细描述</label>
+
+                            <div class="col-sm-11">
+                                <input type="text" name="desc" class="form-control" id="desc" placeholder="描述">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="desc" class="col-sm-1 control-label"></label>
+                            <div class="col-sm-2 col-lg-1">
+                                <input id="searchSysparamBtn" type="button" class="form-control btn-primary" value="查询">
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--End tabs container-->
+</div>
+<script src="tabs.js"></script>
+
+
+

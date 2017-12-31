@@ -1,0 +1,175 @@
+	 <!-- Main content -->
+    <section class="content"   id="searchGoodSection"   ms-controller="good_view">
+      
+      <div class="box box-info">
+      	<div class="box-header with-border">
+          <h3 class="box-title"></h3>
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+          </div>
+        </div>
+      	
+              <div class="box-body">
+              <form class="form-horizontal"  id="searchGoodForm">
+                <div class="form-group">
+                  <label for="goodName" class="col-sm-1 control-label">商品名称</label>
+                  <div class="col-sm-5">
+                    <input type="text"   name="goodName" id="goodName"  class="form-control" >
+                  </div>
+                  <label for="goodType" class="col-sm-1 control-label">商品类型</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="goodType"  id="goodType"  class="form-control" >
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="moneyStart" class="col-sm-1 control-label">最低价格</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="moneyStart"  id="moneyStart"  class="form-control" >
+                  </div>
+                  <label for="moneyEnd" class="col-sm-1 control-label">最高价格</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="moneyEnd"  id="moneyEnd"  class="form-control" >
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="billTimeStart" class="col-sm-1 control-label">购买时间（起）</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="billTimeStart"  id="billTimeStart"  class="form-control" >
+                  </div>
+                  <label for="billTimeEnd" class="col-sm-1 control-label">购买时间（止）</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="billTimeEnd"  id="billTimeEnd"  class="form-control" >
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="mallName" class="col-sm-1 control-label">地址</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="mallName"  id="mallName"  class="form-control" >
+                  </div>
+                  <label for="description" class="col-sm-1 control-label">描述</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="description"  id="description"  class="form-control" >
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                	<label for="billName" class="col-sm-1 control-label">账单名称</label>
+                  <div class="col-sm-5">
+                    <input type="text"   name="billName" id="billName"  class="form-control" >
+                  </div>
+                	<div class="col-sm-2 col-lg-1">
+	                	<input id="searchGoodBtn" type="button" class="form-control btn-primary"  value="查询"   >
+	                </div>
+                </div>
+                </form>
+              </div>
+            
+          </div>
+          <!-- /.box -->
+      
+    	
+    	<div class="box box-info">
+	    	<!--   .box-header   -->
+	        <div class="box-header with-border">
+	          <div class="box-tools pull-right">
+	            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+	          </div>
+	          
+	        </div>
+	        <!-- /.box-header -->
+	        <div class="box-body" >
+	          <table id="goodListTable" 
+	          		class="table dataTable table-striped row-border cell-border " 
+	          			cellspacing="0" width="100%">
+	            <thead>
+					<tr>
+						<th></th>
+						<th>商品名称</th>
+						<th>价格</th>
+						<th>时间</th>
+						<th>购买地址</th>
+						<th>描述</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+            </table>
+	          
+	          
+	          <!-- /.row -->
+	        </div>
+      </div>
+    
+    </section>
+    <script type="text/javascript">
+    $_youapp.ready(function() {
+    	
+    	var page=$.extend({
+    		root:$("#searchGoodSection"),
+    		comp:"",
+    		model:{
+    			vm:avalon.define({
+    		        $id: "good_view",
+    		        data: {}
+    		    })
+    		}
+    	},$_youapp.pageTemplate);
+    	
+    	page.listTable=page.root.find('#goodListTable').initDataTable({
+			url:page.comp+"/bill/billmanager/getGoodsByPage",
+			urlDataFn:function(){
+				return page.root.find("#searchGoodForm").serializeObj();
+			},
+			lengthChange:false,
+			checkbox:true,
+			ops:{
+				view:function(id,rowData){
+                    page.root.find('#goodListTable').goView('/pages/billmanager/good-view.html',{"id":id});
+				},
+				edit:function(id,rowData){
+					page.root.find('#goodListTable').goView('/pages/billmanager/good-edit.html',{"id":id});
+				},
+				del:function(id,rowData){
+					page.ajaxGet({
+						  url:page.comp+'/bill/billmanager/deleteGoodById',
+						  formData:{'id':id},
+						  success:function(data){
+							  page.listTable.ajax.reload();
+						  }
+						});
+				}
+			},
+			columns : [ 
+			{
+				"data" : "goodName",
+				"width": "10%"
+			},
+			{
+				"data" : "money",
+				"width": "10%"
+			}, 
+			{
+				"data" : "billTime",
+				"width": "10%"
+			},
+			{
+				"data" : "mallName",
+				"width": "10%"
+			}, 
+			{
+				"data" : "description",
+				"width": "20%"
+			}
+			
+			]
+		});
+		
+		page.root.find("#searchGoodBtn").on("click",function(){
+			page.listTable.ajax.reload();
+		})
+		
+	});
+	</script>
+

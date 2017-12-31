@@ -1,0 +1,86 @@
+<!-- Main content -->
+<section class="content" id="searchRoleSection" ms-controller="role_view">
+
+    <div class="box box-search">
+        <!--<div class="box-header with-border">-->
+        <!--<h3 class="box-title"></h3>-->
+        <!--<div class="box-tools pull-right">-->
+        <!--<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>-->
+        <!--</div>-->
+        <!--</div>-->
+        <div class="box-body">
+            <form class="form-horizontal" id="searchRoleForm">
+                <div class="form-group">
+                    <label for="roleCode" class="col-sm-1 control-label">编码</label>
+
+                    <div class="col-sm-5">
+                        <input type="text" name="roleCode" class="form-control" id="roleCode" placeholder="编码">
+                    </div>
+                    <label for="roleName" class="col-sm-1 control-label">名称</label>
+
+                    <div class="col-sm-5">
+                        <input type="text" name="roleName" class="form-control" id="roleName" placeholder="名称">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description" class="col-sm-1 control-label">详细描述</label>
+
+                    <div class="col-sm-11">
+                        <input type="text" name="description" class="form-control" id="description" placeholder="描述">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="desc" class="col-sm-1 control-label"></label>
+                    <div class="col-sm-2 col-lg-1">
+                        <input id="searchRoleBtn" type="button" class="form-control btn-primary" value="查询">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- /.box -->
+
+
+    <div class="box box-result">
+        <!--   .box-header   -->
+        <div class="box-header with-border">
+            <button type="submit" class="btn btn-primary btn-sm"
+                    onclick='$(this).goView("/pages/groupmanager/role-add.html");'
+            >新增
+            </button>
+            <button type="submit" class="btn btn-primary btn-sm" id="toAssignGroupBtn"
+            >分配组
+            </button>
+
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+            </div>
+
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table id="roleListTable"
+                   class="table dataTable table-striped row-border cell-border "
+                   cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>主键</th>
+                    <th>编码</th>
+                    <th>名称</th>
+                    <th>描述</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+            </table>
+
+
+            <!-- /.row -->
+        </div>
+    </div>
+
+</section>
+<script src="role-list.js"></script>

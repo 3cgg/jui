@@ -1,0 +1,88 @@
+	 <!-- Main content -->
+    <section class="content"   id="viewMilkSection"   ms-controller="milk_view">
+    
+    	<div class="box box-info">
+	        <div class="box-footer">
+	          <button type="button" class="btn btn-primary"
+	          onclick='$(this).goView("/pages/milkmanager/milk-list.html");'
+	          >返回</button>
+	        </div> 
+      </div>
+    	
+    	<div class="box box-info">
+	    	<!--   .box-header   -->
+	        <div class="box-header with-border">
+	          <h3 class="box-title">明细</h3>
+	          <div class="box-tools pull-right">
+	          </div>
+	        </div>
+	        <!-- /.box-header -->
+	        
+	        <div class="box-body form-horizontal">
+              	<div class="form-group">
+              	
+              	   <label for="amount" class="col-sm-1 control-label">喝奶量</label>
+                   <div class="col-sm-5">
+                   <span id="amount"  class="form-control label-form-control">{{data.amount}}</span>
+                  </div>
+              	  
+					
+              	
+              	   <label for="time" class="col-sm-1 control-label">喝奶时间</label>
+                   <div class="col-sm-5">
+                   <span id="time"  class="form-control label-form-control">{{data.time}}</span>
+                  </div>
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="age" class="col-sm-1 control-label">年龄</label>
+                   <div class="col-sm-5">
+                   <span id="age"  class="form-control label-form-control">{{data.age}}</span>
+                  </div>
+              	  
+					
+              	
+              	   <label for="log" class="col-sm-1 control-label">奶粉品牌</label>
+                   <div class="col-sm-5">
+                   <span id="log"  class="form-control label-form-control">{{data.log}}</span>
+                  </div>
+              	  
+              	</div>
+					
+	        </div>
+      </div>
+    </section>
+    <script type="text/javascript">
+    
+    $_youapp.ready(function(){
+    	
+    	var page=$.extend({
+    		root:$("#viewMilkSection"),
+    		model:{
+    			vm:avalon.define({
+    		        $id: "milk_view",
+    		        data: {}
+    		    })
+    		}
+    	},$_youapp.pageTemplate);
+    	
+    	avalon.scan(page.root[0], page.model.vm);  // void braces
+    	
+    	function getId(){
+        	return page.root.getViewParam().id;
+        }
+    	
+    	page.ajaxGet({
+			  url:'/milkmanager/getMilkById',
+			  formData:{'id':getId()},
+			  success:function(data){
+				  page.model.vm.data=data;
+		  		  avalon.scan(page.root[0], page.model.vm);
+			  }
+			});
+    });
+    </script>
+	
+

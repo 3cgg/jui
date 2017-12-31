@@ -1,0 +1,92 @@
+<!--所有的人 按照这个页面来做啊， 包括 列表+表单 -->
+<!-- Main content -->
+<section class="content" id="searchParamCodeSection" ms-controller="paramcode-list">
+
+    <div class="box box-search">
+        <!--<div class="box-header with-border">-->
+        <!--<h3 class="box-title"></h3>-->
+        <!--<div class="box-tools pull-right">-->
+        <!--<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>-->
+        <!--</div>-->
+        <!--</div>-->
+        <div class="box-body">
+            <form class="form-horizontal" id="searchParamCodeForm">
+                <div class="form-group">
+                    <label for="code" class="col-sm-1 control-label">编码</label>
+
+                    <div class="col-sm-5">
+                        <input type="text" name="code" class="form-control" id="code" placeholder="编码">
+                    </div>
+                    <label for="value" class="col-sm-1 control-label">名称</label>
+
+                    <div class="col-sm-5">
+                        <input type="text" name="name" class="form-control" id="value" placeholder="参数值">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="type" class="col-sm-1 control-label requiredMask">类型</label>
+                    <div class="col-sm-5">
+                        <select id="type" class="form-control select2 " name="type">
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description" class="col-sm-1 control-label">详细描述</label>
+
+                    <div class="col-sm-11">
+                        <input type="text" name="description" class="form-control" id="description" placeholder="描述">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="searchParamCodeBtn" class="col-sm-1 control-label"></label>
+                    <div class="col-sm-2 col-lg-1">
+                        <input id="searchParamCodeBtn" type="button" class="form-control btn-primary" value="查询">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- /.box -->
+
+
+    <div class="box box-result">
+        <!--   .box-header   -->
+        <div class="box-header with-border">
+            <button type="submit" class="btn btn-primary btn-sm"
+                    onclick='$(this).goView("/pages/codetable/paramcode-add.html");'
+            >新增
+            </button>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+            </div>
+
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table id="paramCodeListTable"
+                   class="table dataTable table-striped row-border cell-border "
+                   cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>主键</th>
+                    <th>类型</th>
+                    <th>编码</th>
+                    <th>名称</th>
+                    <th>描述</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+            </table>
+
+
+            <!-- /.row -->
+        </div>
+    </div>
+
+</section>
+<script src="paramcode-list.js"></script>

@@ -1,0 +1,194 @@
+	 <!-- Main content -->
+    <section class="content"   id="searchBillSection"   ms-controller="bill_view">
+      
+      <div class="box box-info">
+      	<div class="box-header with-border">
+          <h3 class="box-title"></h3>
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+          </div>
+        </div>
+              <div class="box-body">
+              <form class="form-horizontal"  id="searchBillForm">
+                <div class="form-group">
+                  <label for="billName" class="col-sm-1 control-label">账单名称</label>
+                  <div class="col-sm-5">
+                    <input type="text"   name="billName" id="billName"  class="form-control" >
+                  </div>
+                  <label for="billType" class="col-sm-1 control-label">账单类型</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="billType"  id="billType"  class="form-control" >
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="moneyStart" class="col-sm-1 control-label">最低价格</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="moneyStart"  id="moneyStart"  class="form-control" >
+                  </div>
+                  <label for="moneyEnd" class="col-sm-1 control-label">最高价格</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="moneyEnd"  id="moneyEnd"  class="form-control" >
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="billTimeStart" class="col-sm-1 control-label">购买时间（起）</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="billTimeStart"  id="billTimeStart"  class="form-control" >
+                  </div>
+                  <label for="billTimeEnd" class="col-sm-1 control-label">购买时间（止）</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="billTimeEnd"  id="billTimeEnd"  class="form-control" >
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="mallName" class="col-sm-1 control-label">购物地址</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="mallName"  id="mallName"  class="form-control" >
+                  </div>
+                  <label for="description" class="col-sm-1 control-label">描述</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="description"  id="description"  class="form-control" >
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                	<label for="desc" class="col-sm-1 control-label"></label>
+                	<div class="col-sm-2 col-lg-1">
+	                	<input id="searchBillBtn" type="button" class="form-control btn-primary"  value="查询"   >
+	                </div>
+                </div>
+                </form>
+              </div>
+          </div>
+          <!-- /.box -->
+      
+    	
+    	<div class="box box-info">
+	    	<!--   .box-header   -->
+	        <div class="box-header with-border">
+	          <button type="submit" class="btn btn-primary btn-sm"
+	          onclick='$(this).goView("/pages/billmanager/bill-add.html");'
+	          >新增</button>
+	          <button type="button" class="btn btn-primary btn-sm"  id="toAddGoodBtn"
+	          >增加商品</button>
+	          <div class="box-tools pull-right">
+	            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+	          </div>
+	          
+	        </div>
+	        <!-- /.box-header -->
+	        <div class="box-body" >
+	          <table id="billListTable" 
+	          		class="table table-striped table-bordered table-condensed table-hover cf" 
+	          		>
+	            <thead>
+					<tr>
+						<th></th>
+						<th>账单名称</th>
+						<th>价格</th>
+						<th>账单时间</th>
+						<th>购买地址</th>
+						<th>描述</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+            </table>
+	          
+	          
+	          <!-- /.row -->
+	        </div>
+      </div>
+    
+    </section>
+    <script type="text/javascript">
+    $_youapp.ready(function() {
+    	
+    	var page=$.extend({
+    		root:$("#searchBillSection"),
+    		comp:"",
+    		model:{
+    			vm:avalon.define({
+    		        $id: "bill_view",
+    		        data: {}
+    		    })
+    		}
+    	},$_youapp.pageTemplate);
+    	
+    	page.listTable=page.root.find('#billListTable').initDataTable({
+			url:page.comp+"/bill/billmanager/getBillsByPage",
+			urlDataFn:function(){
+				return page.root.find("#searchBillForm").serializeObj();
+			},
+			lengthChange:false,
+			checkbox:true,
+			ops:{
+				view:function(id,rowData){
+                    page.root.find('#billListTable').goView('/pages/billmanager/bill-view.html',{"id":id});
+				},
+				edit:function(id,rowData){
+					page.root.find('#billListTable').goView('/pages/billmanager/bill-edit.html',{"id":id});
+				},
+				del:function(id,rowData){
+					page.ajaxGet({
+						  url:page.comp+'/bill/billmanager/deleteBillById',
+						  formData:{'id':id},
+						  success:function(data){
+							  page.listTable.ajax.reload();
+						  }
+						});
+				}
+			},
+			columns : [ 
+			{
+				"data" : "billName",
+				"width": "10%"
+			},
+			{
+				"data" : "money",
+				"width": "10%"
+			}, 
+			{
+				"data" : "billTime",
+				"width": "10%"
+			},
+			{
+				"data" : "mallName",
+				"width": "10%"
+			}, 
+			{
+				"data" : "description",
+				"width": "20%"
+			}
+			
+			]
+		});
+		
+		page.root.find("#searchBillBtn").on("click",function(){
+			page.listTable.ajax.reload();
+		});
+		
+		
+		function valid(ids){
+			if(ids&&ids.length==0){
+				page.warning('请选择一条记录');
+				return false;
+			}
+			if(ids&&ids.length>1){
+				page.warning('只能选择一条记录');
+				return false;
+			}
+			return true;
+		}
+		page.root.find('#toAddGoodBtn').on('click',function(){
+			var ids=page.root.find('#billListTable').getSelectedRow();
+			if(valid(ids)){
+				$(this).goView('/pages/billmanager/good-add.html',{"id":ids[0]});
+			}
+		});
+		
+	});
+	</script>
+

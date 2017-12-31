@@ -1,0 +1,128 @@
+<!-- Main content -->
+
+<section class="content" id="editContentSection" ms-controller="content_edit">
+
+    <div class="box box-bys-btn">
+        <div class="box-footer">
+            <button type="button" class="btn btn-primary btn-sm" id="editContentBtn">提交</button>
+            <button type="button" class="btn btn-primary btn-sm" id="backContentBtn">返回</button>
+            <div class="box-tools pull-right">
+                编辑
+            </div>
+        </div>
+    </div>
+
+    <div class="box box-bys-content">
+        <!--   .box-header   -->
+        <!-- /.box-header -->
+
+        <div class="box-body">
+
+            <form role="form" id="editContentForm" class="form-horizontal">
+                <div class="form-group">
+
+                    <label for="title" class="col-sm-1 control-label requiredMask">标题</label>
+                    <div class="col-sm-11 col-lg-11">
+                        <input id="title" name="title" type="text" class="form-control" ms-attr-value="data.title" ></input>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="author" class="col-sm-1 control-label requiredMask">作者</label>
+                    <div class="col-sm-5">
+                        <input id="author" name="author" type="text" class="form-control" ms-attr-value="data.author" ></input>
+                    </div>
+
+
+                    <label for="source" class="col-sm-1 control-label requiredMask">来源</label>
+                    <div class="col-sm-5">
+                        <input id="source" name="source" type="text" class="form-control" ms-attr-value="data.source"></input>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="publishTime" class="col-sm-1 control-label requiredMask">发布时间</label>
+                    <div class="col-sm-5">
+
+                        <input id="publishTime" name="publishTime" type="text" class="form-control" ms-attr-value="data.publishTime" ></input>
+
+                    </div>
+
+                    <label for="sequence" class="col-sm-1 control-label requiredMask">顺序</label>
+                    <div class="col-sm-1 col-lg-1 ">
+                        <input id="sequence" name="sequence" type="text" class="form-control" ms-attr-value="data.sequence"></input>
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="link" class="col-sm-1 control-label requiredMask">源地址（http://）</label>
+                    <div class="col-sm-11 col-lg-11">
+                        <input id="link" name="link" type="text" class="form-control" ms-attr-value="data.link"></input>
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="overview" class="col-sm-1 control-label requiredMask">简介</label>
+                    <div class="col-sm-11 col-lg-11">
+                        <textarea id="overview" name="overview" class="form-control" rows="3"
+                                  placeholder=" ..." ms-attr-value="data.overview" ></textarea>
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="adImg" class="col-sm-1 control-label requiredMask">宣传图</label>
+                    <div class="col-sm-5">
+                        <div name="fileUploadDiv" id="adFileUploadDiv"></div>
+                        <input id="adImg" name="adImg" type="text" class="form-control"
+                               style="width:0px;height: 0px;padding: 0px;" ms-attr-value="data.adImg" ></input>
+                    </div>
+
+                </div>
+                <div class="form-group">
+
+                    <label for="content" class="col-sm-1 control-label requiredMask">内容</label>
+                    <!--<div class="col-sm-5">-->
+                    <!--<div id="contentContainer" name="contentContainer" class="col-sm-11 col-lg-11" ></div>-->
+                    <div class="col-sm-11 col-lg-11">
+                        <textarea id="content" name="content" style="border: solid 1px #887c7c;height: 318px"
+                                  class="form-control" rows="15" placeholder=" ..." readonly ms-attr-value="data.content" ></textarea>
+                        <div class="editor-cover">
+
+                            <div style="">
+                                <a id="contentEdit" href="#" class="btn editor-cover-btn hover-black-opacity" title="">
+                                    编辑
+                                </a>
+                                <a id="contentPreview" href="#" class="btn editor-cover-btn hover-black-opacity "
+                                   title="">
+                                    查看
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <input type="hidden"  name="id"  ms-attr-value="data.id"  />
+            </form>
+            <!-- /.row -->
+        </div>
+    </div>
+
+</section>
+
+<link rel="stylesheet" href="content-add.css">
+<script src="content-edit.js"></script>

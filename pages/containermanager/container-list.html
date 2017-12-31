@@ -1,0 +1,158 @@
+	 <!-- Main content -->
+    <section class="content"   id="searchContainerSection"   ms-controller="container_view">
+      
+      <div class="box box-info">
+      	<div class="box-header with-border">
+          <h3 class="box-title"></h3>
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+          </div>
+        </div>
+              <div class="box-body">
+              <form class="form-horizontal"  id="searchContainerForm">
+                <div class="form-group">
+                  <label for="appName" class="col-sm-1 control-label">应用名</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="appName" class="form-control" id="appName" placeholder="">
+                  </div>
+                  
+                  <label for="appCompName" class="col-sm-1 control-label">组件名</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="appCompName" class="form-control" id="appCompName" placeholder="">
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="appVersion" class="col-sm-1 control-label">组件版本</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="appVersion" class="form-control" id="appVersion" placeholder="">
+                  </div>
+                  
+                  <label for="appHost" class="col-sm-1 control-label">应用地址URL</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="appHost" class="form-control" id="appHost" placeholder="">
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="appActive" class="col-sm-1 control-label">是否激活</label>
+                  <div class="col-sm-5">
+                  	<select  id="appActive"  name="appActive" class="form-control select2 codetable"   data-codeType="IS_ACTIVE"  data-codeAlter >
+	                </select>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                	<label for="desc" class="col-sm-1 control-label"></label>
+                	<div class="col-sm-2 col-lg-1">
+	                	<input id="searchContainerBtn" type="button" class="form-control btn-primary"  value="查询"   >
+	                </div>
+                </div>
+                </form>
+              </div>
+          </div>
+          <!-- /.box -->
+      
+    	
+    	<div class="box box-info">
+	    	<!--   .box-header   -->
+	        <div class="box-header with-border">
+	          <button type="button" class="btn btn-primary btn-sm"
+	          onclick='$(this).goView("/pages/containermanager/container-deploy.html");'
+	          >部署应用(JAR)</button>
+	          <div class="box-tools pull-right">
+	            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+	          </div>
+	          
+	        </div>
+	        <!-- /.box-header -->
+	        <div class="box-body" >
+	          <table id="containerListTable" 
+	          		class="table dataTable table-striped row-border cell-border " 
+	          			cellspacing="0" width="100%">
+	            <thead>
+					<tr>
+						<th></th>
+						<th>主键</th>
+						<th>应用名</th>
+						<th>组件名</th>
+						<th>版本</th>
+						<th>应用URL</th>
+						<th>状态</th>
+						<th>描述</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+            </table>
+	          
+	          
+	          <!-- /.row -->
+	        </div>
+      </div>
+    
+    </section>
+    <script type="text/javascript">
+    $_youapp.ready(function() {
+    	
+    	var page=$.extend({
+    		root:$("#searchContainerSection"),
+    		model:{
+    			vm:avalon.define({
+    		        $id: "container_view",
+    		        data: {}
+    		    })
+    		}
+    	},$_youapp.pageTemplate);
+    	
+    	page.listTable=page.root.find('#containerListTable').initDataTable({
+			url:"/containermanager/getAppMetasByPage",
+			urlDataFn:function(){
+				return page.root.find("#searchContainerForm").serializeObj();
+			},
+			checkbox:true,
+			ops:{
+				view:function(id,rowData){
+                    page.root.find('#containerListTable').goView('/pages/containermanager/container-view.html',{"id":id});
+				}
+			},
+			columns : [ 
+			{
+				"data" : "id",
+				"orderable" : false,
+				 "width": "10%"
+			}, 
+			{
+				"data" : "appName",
+				"width": "10%"
+			},
+			{
+				"data" : "appCompName",
+				"width": "10%"
+			}, 
+			{
+				"data" : "appVersion",
+				"width": "10%"
+			},
+			{
+				"data" : "appHost",
+				"width": "10%"
+			},
+			{
+				"data" : "appActive",
+				"width": "10%"
+			},
+			{
+				"data" : "appDesc",
+				"width": "10%"
+			}
+			]
+		});
+		
+		page.root.find("#searchContainerBtn").on("click",function(){
+			page.listTable.ajax.reload();
+		});
+		
+		page.codeTable($('.codetable'));
+	});
+	</script>
+

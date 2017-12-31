@@ -1,0 +1,83 @@
+<!--所有的人 按照这个页面来做啊， 包括 列表+表单 -->
+<!-- Main content -->
+<section class="content" id="searchSysParamSection" ms-controller="sysparam_view">
+
+    <div class="box box-search">
+        <!--<div class="box-header with-border">-->
+        <!--<h3 class="box-title"></h3>-->
+        <!--<div class="box-tools pull-right">-->
+        <!--<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>-->
+        <!--</div>-->
+        <!--</div>-->
+        <div class="box-body">
+            <form class="form-horizontal" id="searchSysParamForm">
+                <div class="form-group">
+                    <label for="code" class="col-sm-1 control-label">编码</label>
+
+                    <div class="col-sm-5">
+                        <input type="text" name="code" class="form-control" id="code" placeholder="编码">
+                    </div>
+                    <label for="value" class="col-sm-1 control-label">参数值</label>
+
+                    <div class="col-sm-5">
+                        <input type="text" name="value" class="form-control" id="value" placeholder="参数值">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="desc" class="col-sm-1 control-label">详细描述</label>
+
+                    <div class="col-sm-11">
+                        <input type="text" name="desc" class="form-control" id="desc" placeholder="描述">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="desc" class="col-sm-1 control-label"></label>
+                    <div class="col-sm-2 col-lg-1">
+                        <input id="searchSysparamBtn" type="button" class="form-control btn-primary" value="查询">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- /.box -->
+
+
+    <div class="box box-result">
+        <!--   .box-header   -->
+        <div class="box-header with-border">
+            <button type="submit" class="btn btn-primary btn-sm"
+                    onclick='$(this).goView("/pages/sysparam/sysparam-add.html");'
+            >新增
+            </button>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+            </div>
+
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table id="sysparamListTable"
+                   class="table dataTable table-striped row-border cell-border "
+                   cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>主键</th>
+                    <th>编码</th>
+                    <th>参数值</th>
+                    <th>描述</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+            </table>
+
+
+            <!-- /.row -->
+        </div>
+    </div>
+
+</section>
+<script src="sysparam-list.js"></script>

@@ -1,0 +1,210 @@
+	 <!-- Main content -->
+    <section class="content"   id="searchAlertItemSection"   ms-controller="alertItem_view">
+      
+      <div class="box box-info">
+      	<div class="box-header with-border">
+          <h3 class="box-title"></h3>
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+          </div>
+        </div>
+              <div class="box-body">
+              <form class="form-horizontal"  id="searchAlertItemForm">
+              	
+              	<div class="form-group">
+              	
+              	   <label for="code" class="col-sm-1 control-label">编码</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="code" class="form-control" id="code">
+                  </div>
+              	  
+					
+              	
+              	   <label for="name" class="col-sm-1 control-label">名称</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="name" class="form-control" id="name">
+                  </div>
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="status" class="col-sm-1 control-label">状态</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="status" class="form-control" id="status">
+                  </div>
+              	  
+					
+              	
+              	   <label for="meta" class="col-sm-1 control-label">数据结构（元数据）</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="meta" class="form-control" id="meta">
+                  </div>
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="description" class="col-sm-1 control-label">描述</label>
+                  <div class="col-sm-8">
+                    <input type="text"  name="description" class="form-control" id="description">
+                  </div>
+              	  
+					
+              	
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="createTimeStart" class="col-sm-1 control-label">创建时间（起）</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="createTimeStart" class="form-control" id="createTimeStart">
+                  </div>
+              	  
+					
+              	
+              	   <label for="createTimeEnd" class="col-sm-1 control-label">创建时间（止）</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="createTimeEnd" class="form-control" id="createTimeEnd">
+                  </div>
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="updateTimeStart" class="col-sm-1 control-label">更新时间（起）</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="updateTimeStart" class="form-control" id="updateTimeStart">
+                  </div>
+              	  
+					
+              	
+              	   <label for="updateTimeEnd" class="col-sm-1 control-label">更新时间（止）</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="updateTimeEnd" class="form-control" id="updateTimeEnd">
+                  </div>
+              	  
+              	</div>
+					
+				<div class="form-group">
+                	<label for="desc" class="col-sm-1 control-label"></label>
+                	<div class="col-sm-2 col-lg-1">
+	                	<input id="searchAlertItemBtn" type="button" class="form-control btn-primary"  value="查询"   >
+	                </div>
+                </div>
+                </form>
+              </div>
+          </div>
+          <!-- /.box -->
+      
+    	
+    	<div class="box box-info">
+	    	<!--   .box-header   -->
+	        <div class="box-header with-border">
+	          <button type="submit" class="btn btn-primary btn-sm"
+	          onclick='$(this).goView("/pages/alertmanager/alertitem-add.html");'
+	          >新增</button>
+	          <div class="box-tools pull-right">
+	            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+	          </div>
+	          
+	        </div>
+	        <!-- /.box-header -->
+	        <div class="box-body" >
+	          <table id="alertItemListTable" 
+	          		class="" 
+	          			cellspacing="0" width="100%">
+	            <thead>
+					<tr>
+		              	<th></th>
+						
+						<th>编码</th>
+						<th>名称</th>
+						<th>状态</th>
+						<th>数据结构（元数据）</th>
+						<th>描述</th>
+						<th></th>
+					</tr>
+				</thead>
+            </table>
+	          
+	          
+	          <!-- /.row -->
+	        </div>
+      </div>
+    
+    </section>
+    <script type="text/javascript">
+    $_youapp.ready(function() {
+    	
+    	var page=$.extend({
+    		root:$("#searchAlertItemSection"),
+    		model:{
+    			vm:avalon.define({
+    		        $id: "alertItem_view",
+    		        data: {}
+    		    })
+    		}
+    	},$_youapp.pageTemplate);
+    	
+    	page.listTable=page.root.find('#alertItemListTable').initDataTable({
+			url:"/alertmanager/getAlertItemsByPage",
+			urlDataFn:function(){
+				return page.root.find("#searchAlertItemForm").serializeObj();
+			},
+			lengthChange:false,
+			checkbox:true,
+			ops:{
+				view:function(id,rowData){
+                    page.root.find('#alertItemListTable').goView('/pages/alertmanager/alertitem-view.html',{"id":id});
+				},
+				edit:function(id,rowData){
+					page.root.find('#alertItemListTable').goView('/pages/alertmanager/alertitem-edit.html',{"id":id});
+				},
+				del:function(id,rowData){
+					page.ajaxGet({
+						  url:'/alertmanager/deleteAlertItemById',
+						  formData:{'id':id},
+						  success:function(data){
+							  page.listTable.ajax.reload();
+						  }
+						});
+				}
+			},
+			columns : [
+			
+			{
+				"data" : "code",
+				"width": "10%"
+			}
+			,
+			{
+				"data" : "name",
+				"width": "10%"
+			}
+			,
+			{
+				"data" : "status",
+				"width": "10%"
+			}
+			,
+			{
+				"data" : "meta",
+				"width": "10%"
+			}
+			,
+			{
+				"data" : "description",
+				"width": "20%"
+			}
+			]
+		});
+		
+		page.root.find("#searchAlertItemBtn").on("click",function(){
+			page.listTable.ajax.reload();
+		})
+		
+	});
+	</script>
+

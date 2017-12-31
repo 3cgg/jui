@@ -1,0 +1,178 @@
+	 <!-- Main content -->
+    <section class="content"   id="viewGoodSection" >
+    <form role="form"  id="editGoodForm"  class="form-horizontal">
+    	<div class="box box-info">
+	        <div class="box-footer">
+	          <button type="submit" class="btn btn-primary">提交</button>
+	          <button type="button" class="btn btn-primary"
+	          onclick='$(this).goView("/pages/billmanager/good-list.html");'
+	          >返回</button>
+	        </div> 
+      </div>
+    	
+    	<div class="box box-info"  ms-controller="good_view"  id="goodInfoDiv">
+	    	<!--   .box-header   -->
+	        <div class="box-header with-border">
+	          <h3 class="box-title">商品信息明细</h3>
+	          <div class="box-tools pull-right">
+	          </div>
+	        </div>
+	        <!-- /.box-header -->
+	        
+	        <div class="box-body form-horizontal">
+	        	<div class="form-group">
+                  <label for="goodName" class="col-sm-1 control-label ">商品名称</label>
+                  <div class="col-sm-5">
+				  <input name="goodName"  ms-attr-value="data.goodName" type="text" class="form-control" placeholder=""  >
+				 </div>
+				 <label for="goodType" class="col-sm-1 control-label requiredMask">商品类型</label>
+				 <div class="col-sm-5">
+				  	<input name="goodType"  ms-attr-value="data.goodType" type="text" class="form-control" placeholder=""  >
+	             </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="money" class="col-sm-1 control-label ">金额</label>
+                  <div class="col-sm-5">
+				  <input name="money"  ms-attr-value="data.money" type="text" class="form-control" placeholder=""  >
+				 </div>
+				 <label for="description" class="col-sm-1 control-label requiredMask">描述</label>
+                  <div class="col-sm-5">
+                  	<textarea name="description" ms-attr-value="data.description" class="form-control" rows="3" placeholder=" ..."  ></textarea>
+			      </div>
+                </div>
+                <input type="hidden"  name="id"  ms-attr-value="data.id"  />
+	        </div>
+      </div>
+	
+	</form>
+
+	<div class="box box-info"  ms-controller="bill_view"  id="billInfoDiv">
+	    	<!--   .box-header   -->
+	        <div class="box-header with-border">
+	          <h3 class="box-title">账单信息明细</h3>
+	          <div class="box-tools pull-right">
+	          </div>
+	        </div>
+	        <!-- /.box-header -->
+	        
+	        <div class="box-body form-horizontal">
+	        	<div class="form-group">
+                  <label for="billName" class="col-sm-1 control-label">账单名称</label>
+                  <div class="col-sm-5">
+				  <span id="billName"  class="form-control label-form-control">{{data.billName}}</span>
+				 </div>
+				  <label for="billType" class="col-sm-1 control-label">账单类型</label>
+				  <div class="col-sm-5">
+				  	<span id=billType  class="form-control label-form-control" >{{data.billType}}</span>		
+                 </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="money" class="col-sm-1 control-label">Money</label>
+                  <div class="col-sm-5">
+				  <span id="money"  class="form-control label-form-control">{{data.money}}</span>
+				 </div>
+				  <label for="billTime" class="col-sm-1 control-label">Bill Time</label>
+				  <div class="col-sm-5">
+				  	<span id=billTime  class="form-control label-form-control" >{{data.billTime}}</span>		
+                 </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="mallName" class="col-sm-1 control-label">地址</label>
+                  <div class="col-sm-5">
+				  <span id="mallName"  class="form-control label-form-control">{{data.mallName}}</span>
+				 </div>
+				  <label for="description" class="col-sm-1 control-label">描述</label>
+				  <div class="col-sm-5">
+				  	<span id="description"  class="form-control label-form-control" >{{data.description}}</span>		
+                 </div>
+                </div>
+	        </div>
+      </div>
+
+	        
+    </section>
+    <script type="text/javascript">
+    
+    $_youapp.ready(function(){
+    	
+    	var page=$.extend({
+    		root:$("#viewGoodSection"),
+    		comp:"",
+    		model:{
+    			vm:avalon.define({
+    		        $id: "good_view",
+    		        data: {}
+    		    }),
+    		    bill:avalon.define({
+    		        $id: "bill_view",
+    		        data: {}
+    		    })
+    		}
+    	},$_youapp.pageTemplate);
+    	
+    	avalon.scan(page.root.find('#goodInfoDiv')[0], page.model.vm);  // void braces
+    	avalon.scan(page.root.find('#billInfoDiv')[0], page.model.bill);  // void braces
+
+    	function getId(){
+        	return page.root.getViewParam().id;
+        	//return "32500915579c4ef980ee6938e88ddcb6";
+        }
+    	
+    	function getBillInfo(billId){
+    		page.ajaxGet({
+  			  url:page.comp+'/bill/billmanager/getBillById',
+  			  formData:{'id':billId},
+  			  success:function(data){
+  				  page.model.bill.data=data;
+  		  		  avalon.scan(page.root.find('#billInfoDiv')[0], page.model.bill);
+  			  }
+  			});
+    	}
+    	
+    	page.ajaxGet({
+			  url:page.comp+'/bill/billmanager/getGoodById',
+			  formData:{'id':getId()},
+			  success:function(data){
+				  page.model.vm.data=data;
+		  		  avalon.scan(page.root.find('#goodInfoDiv')[0], page.model.vm);
+		  		  getBillInfo(data.billId);
+			  }
+			});
+    
+    	page.root.find("#editGoodForm").validate({
+			rules: {
+				'goodName': {
+					   required: true,
+					   maxlength:64
+				   },
+				'goodType': {
+					   required: true,
+					   maxlength:64
+				   },
+				'money': {
+					   required: true,
+					   number:true
+				   },
+			   'description': {
+				   required: true,
+				   maxlength:2000
+			   }
+			  },
+			  submitHandler:function(form){
+				  page.submitForm({
+					  url:page.comp+'/bill/billmanager/updateGood',
+					  formSelector:form,
+					  success:function(data){
+						  page.root.goView('/pages/billmanager/good-list.html');
+					  }
+					});
+			 }
+		});
+    	
+    });
+    </script>
+	
+

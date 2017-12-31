@@ -1,0 +1,54 @@
+<!-- Main content -->
+<section class="content" id="addRoleSection">
+
+    <form role="form" id="addRoleForm" class="form-horizontal">
+
+        <div class="box box-bys-btn">
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary btn-sm">提交</button>
+                <button type="button" class="btn btn-primary btn-sm"
+                        onclick='$(this).goView("/pages/groupmanager/role-list.html");'
+                >返回
+                </button>
+                <div class="box-tools pull-right">
+                    角色新增
+                </div>
+            </div>
+        </div>
+
+        <div class="box box-bys-content">
+            <!--   .box-header   -->
+            <div class="box-header with-border">
+                <h3 class="box-title">角色新增</h3>
+                <div class="box-tools pull-right">
+                </div>
+            </div>
+            <!-- /.box-header -->
+
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="roleCode" class="col-sm-1 control-label requiredMask">编码</label>
+                    <div class="col-sm-5">
+                        <input name="roleCode" id="roleCode" type="text" class="form-control" placeholder="">
+                    </div>
+                    <label for="roleName" class="col-sm-1 control-label requiredMask">名称</label>
+                    <div class="col-sm-5">
+                        <input name="roleName" id="roleName" type="text" class="form-control" placeholder="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description" class="col-sm-1 control-label requiredMask">详情描述</label>
+                    <div class="col-sm-5">
+                        <textarea name="description" id="description" class="form-control" rows="3"
+                                  placeholder=" ..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</section>
+
+
+<script src="role-add.js"></script>

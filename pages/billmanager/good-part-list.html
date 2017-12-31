@@ -1,0 +1,91 @@
+	 <!-- Main content -->
+    <section style="padding-left:0px;padding-right: 0px;"  class="content"   id="viewGoodOnBillSection"   ms-controller="good_on_bill_view">
+    	<table id="goodOnBillListTable" 
+		          		class="table dataTable table-striped row-border cell-border " 
+		          			cellspacing="0" width="100%">
+		            <thead>
+						<tr>
+							<th>商品名称</th>
+							<th>价格</th>
+							<th>时间</th>
+							<th>购买地址</th>
+							<th>描述</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+	            </table>
+    </section>
+    <script type="text/javascript">
+    
+    $_youapp.ready(function(){
+    	
+    	var page=$.extend({
+    		root:$("#viewGoodOnBillSection"),
+    		comp:"",
+    		model:{
+    			vm:avalon.define({
+    		        $id: "good_on_bill_view",
+    		        data: {}
+    		    })
+    		}
+    	},$_youapp.pageTemplate);
+    	
+    	avalon.scan(page.root[0], page.model.vm);  // void braces
+    	
+    	function getId(){
+        	return page.root.getViewParam().id;
+        	//return "71fbb5bd5de84f01bcc22b6e8a3e4ead";
+        }
+    	
+    	page.listTable=page.root.find('#goodOnBillListTable').initDataTable({
+			url:page.comp+"/bill/billmanager/getGoodsByPage",
+			urlDataFn:function(){
+				return {billId:getId()}
+			},
+			lengthChange:false,
+			ops:{
+				view:function(id,rowData){
+                    page.root.find('#goodOnBillListTable').goView('/pages/billmanager/good-part-view.html',{"id":id});
+				},
+				edit:function(id,rowData){
+					page.root.find('#goodOnBillListTable').goView('/pages/billmanager/good-part-edit.html',{"id":id});
+				},
+				del:function(id,rowData){
+					page.ajaxGet({
+						  url:page.comp+'/bill/billmanager/deleteGoodById',
+						  formData:{'id':id},
+						  success:function(data){
+							  page.listTable.ajax.reload();
+						  }
+						});
+				}
+			},
+			columns : [ 
+			{
+				"data" : "goodName",
+				"width": "10%"
+			},
+			{
+				"data" : "money",
+				"width": "10%"
+			}, 
+			{
+				"data" : "billTime",
+				"width": "10%"
+			},
+			{
+				"data" : "mallName",
+				"width": "10%"
+			}, 
+			{
+				"data" : "description",
+				"width": "20%"
+			}
+			
+			]
+		});
+    	
+    });
+    </script>
+	
+

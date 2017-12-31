@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>YouAPP</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="../../plugins/font-awesome/css/font-awesome.css">
+  <!-- Theme style -->
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="../../plugins/iCheck/all.css">
+  
+  <!--   -->
+  <link rel="stylesheet" href="../../dist/css/AdminLTE.css">
+  
+  <!-- AdminLTE Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="../../dist/css/skins/_all-skins.css">
+	
+	<!--  jquery confirm -->	
+  <link rel="stylesheet" href="../../plugins/jquery-confirm/jquery-confirm.css">
+	
+	<!--  datatables -->
+	<link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
+	<!--  tabs -->
+	<link rel="stylesheet" href="../../plugins/tabs/tabulous.css">
+	
+	
+	<link rel="stylesheet"
+	href="../../plugins/webuploader/webuploader.css">
+	<link rel="stylesheet"
+	href="../../plugins/webuploader/image-upload/style.css">
+	
+	<!--  youapp -->
+	<link rel="stylesheet" href="../../_youapp/youapp.css">
+	
+	<!-- JS Cookie -->
+	<script src="../../plugins/cookie/js.cookie.js"></script>
+	
+	<!-- ./../wrapper -->
+	<!-- jQuery 2.2.3 -->
+	<script src="../../plugins/jQuery/jquery-2.2.3.min.js"></script>
+	<!-- Bootstrap 3.3.6 -->
+	<script src="../../bootstrap/js/bootstrap.min.js"></script>
+	
+	<!-- JS Tree -->
+	<script src="../../plugins/jstree/jstree.js"></script>
+	
+	<!--  webuploader -->
+	<script src="../../plugins/webuploader/webuploader.js"></script>
+	
+	<link rel="stylesheet"  href="../../plugins/toast/jquery.toast.css">
+	
+	<link rel="stylesheet"  href="../../plugins/jstree/themes/default/style.min.css">
+					
+	
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="hold-transition skin-blue-light  sidebar-mini  body_font  fixed" 
+ data-layoutId="body"
+ data-htmlUrl="pages/layout/layout-boot.html"  >
+
+
+<!-- iCheck -->
+<script src="../../plugins/iCheck/icheck.js"></script>
+
+
+<!-- jquery confirm -->
+<script src="../../plugins/jquery-confirm/jquery-confirm.js"></script>
+
+<!-- datatables -->
+<script src="../../plugins/datatables/jquery.dataTables.js"></script>
+<script src="../../plugins/datatables/dataTables.bootstrap.js"></script>
+
+<!-- AdminLTE App -->
+<script src="../../dist/js/app.js"></script> 
+
+<!-- tabs -->
+<script src="../../plugins/tabs/tabulous.js"></script>
+
+
+<!-- jquery-validation -->
+<script src="../../plugins/jquery-validation/jquery.validate.js"></script>
+<!-- avalon -->
+<script src="../../plugins/avalon/avalon.js"></script>
+
+<!--  webuploader -->
+<script src="../../plugins/toast/jquery.toast.js"></script>
+		
+<!-- YouAPP -->
+<script src="../../_youapp/_jsregister.js"></script>
+<script src="../../_youapp/util.js"></script>
+<script src="../../_youapp/storage.js"></script>
+<script src="../../_youapp/config.js"></script>
+<script src="../../_youapp/jstrees.js"></script>
+<script src="../../_youapp/youapp.js"></script>
+<script src="../../_youapp/datatables.js"></script>
+<script src="../../_youapp/uploads.js"></script>
+<script src="../../_youapp/codetables.js"></script>	
+	
+</body>
+
+<script type="text/javascript">
+$_youapp.ready(function(){
+	$_youapp.$_codeTable.codeTable({
+		getType:function(data){
+			return data.type;
+		},
+		getCode:function(data){
+			return data.code;
+		},
+		getName:function(data){
+			return data.codeName;
+		},
+		getDesc:function(data){
+			return data.description;
+		},
+		fnDatas:function(callback){
+			
+			$_youapp.$_data.ajaxGet({
+				url:'/codetablemanager/getParamCodesByPage',
+				formData:{},
+				paginationData:$.extend({},{
+			  		pageNumber:0,
+					pageSize:100000,
+					orders:[]
+			  		}),
+		  		success:function(data){
+		  			callback(data.data);
+		  		}
+			});
+		},
+		fnData:function(type,callback){
+			var data=[{
+				code:'test-'+type+'-code-1',
+				codeName:'test-'+type+'-name-1',
+				desc:type
+			},
+			{
+				code:'test-'+type+'-code-2',
+				codeName:'test-'+type+'-name-2',
+				desc:type
+			}
+			];
+			callback(data);
+		}
+	});
+})
+</script>
+</html>

@@ -1,0 +1,133 @@
+    <section class="content"  id="editBillSection"  ms-controller="bill_edit">
+    
+    	<form role="form"  id="editBillForm"  class="form-horizontal">
+    	
+    	<div class="box box-info">
+	        <div class="box-footer">
+	          <button type="submit" class="btn btn-primary">提交</button>
+	          <button type="button" class="btn btn-primary"
+	          onclick='$(this).goView("/pages/billmanager/bill-list.html");'
+	          >返回</button>
+	        </div> 
+      </div>
+    	
+    	<div class="box box-info">
+	    	<!--   .box-header   -->
+	        <div class="box-header with-border">
+	          <h3 class="box-title">账单信息修改</h3>
+	          <div class="box-tools pull-right">
+	          </div>
+	        </div>
+	        <!-- /.box-header -->
+	        
+	        <div class="box-body">
+             	<div class="form-group">
+                  <label for="billName" class="col-sm-1 control-label ">账单名称</label>
+                  <div class="col-sm-5">
+				  <input name="billName"  ms-attr-value="data.billName" type="text" class="form-control" placeholder=""  >
+				 </div>
+				 <label for="billType" class="col-sm-1 control-label requiredMask">账单类型</label>
+				 <div class="col-sm-5">
+				  	<input name="billType"  ms-attr-value="data.billType" type="text" class="form-control" placeholder=""  >
+	             </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="money" class="col-sm-1 control-label ">金额</label>
+                  <div class="col-sm-5">
+				  <input name="money"  ms-attr-value="data.money" type="text" class="form-control" placeholder=""  >
+				 </div>
+				 <label for="billTime" class="col-sm-1 control-label requiredMask">时间</label>
+				 <div class="col-sm-5">
+				  	<input name="billTime"  ms-attr-value="data.billTime" type="text" class="form-control" placeholder=""  >
+	             </div>
+                </div>
+                
+                <div class="form-group">
+	                <label for="mallName" class="col-sm-1 control-label ">地址</label>
+	                  <div class="col-sm-5">
+					  <input name="mallName"  ms-attr-value="data.mallName" type="text" class="form-control" placeholder=""  >
+					 </div>
+	                  <label for="description" class="col-sm-1 control-label requiredMask">描述</label>
+	                  <div class="col-sm-5">
+	                  	<textarea name="description" ms-attr-value="data.description" class="form-control" rows="3" placeholder=" ..."  ></textarea>
+				      </div>
+                </div>
+	        </div>
+      </div>
+      <input type="hidden"  name="id"  ms-attr-value="data.id"  />
+    </form>
+    
+    </section>
+	<script type="text/javascript">
+    
+    $_youapp.ready(function(){
+    	
+    	var page=$.extend({
+    		root:$("#editBillSection"),
+    		comp:"",
+    		model:{
+    			vm:avalon.define({
+    		        $id: "bill_edit",
+    		        data: {}
+    		    })
+    		}
+    	},$_youapp.pageTemplate);
+    	
+    	avalon.scan(page.root[0], page.model.vm);  // void braces
+    	
+    	function getId(){
+        	return page.root.getViewParam().id;
+        }
+    	
+    	page.ajaxGet({
+			  url:page.comp+'/bill/billmanager/getBillById',
+			  formData:{'id':getId()},
+			  success:function(data){
+				  page.model.vm.data=data;
+		  		  avalon.scan(page.root[0], page.model.vm);
+			  }
+		});
+    	
+    	page.root.find("#editBillForm").validate({
+ 			rules: {
+ 				'billName': {
+					   required: true,
+					   maxlength:64
+				   },
+				'billType': {
+					   required: true,
+					   maxlength:64
+				   },
+				'money': {
+					   required: true,
+					   number:true
+				   },
+				'billTime': {
+					   required: true,
+					   maxlength:64
+				   },
+			   'mallName': {
+				   required: true,
+				   maxlength:128
+			   },
+			   'description': {
+				   required: true,
+				   maxlength:2000
+			   }
+ 			  },
+ 			  submitHandler:function(form){
+ 				  debugger;
+ 				  page.submitForm({
+ 					  url:page.comp+'/bill/billmanager/updateBill',
+ 					  formSelector:form,
+ 					  success:function(data){
+ 						  page.root.goView('/pages/billmanager/bill-list.html');
+ 					  }
+ 					});
+ 			  
+ 			  } 
+ 		});
+    	
+    });
+    </script>

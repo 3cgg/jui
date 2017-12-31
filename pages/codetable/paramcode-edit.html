@@ -1,0 +1,55 @@
+<!-- Main content -->
+<section class="content" id="editParamCodeSection" ms-controller="paramcode-list">
+
+    <form role="form" id="editParamCodeForm" class="form-horizontal">
+
+        <div class="box box-bys-btn">
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary btn-sm">提交</button>
+                <button type="button" class="btn btn-primary btn-sm"
+                        onclick='$(this).goView("/pages/codetable/paramcode-list.html");'
+                >返回
+                </button>
+                <div class="box-tools pull-right">
+                    字典编码修改
+                </div>
+            </div>
+        </div>
+
+        <div class="box box-bys-content">
+            <!--   .box-header   -->
+            <!--<div class="box-header with-border">-->
+            <!--<h3 class="box-title">字典编码修改</h3>-->
+            <!--<div class="box-tools pull-right">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!-- /.box-header -->
+
+            <div class="box-body">
+                <div class="form-group">
+                    <label for="code" class="col-sm-1 control-label ">编码</label>
+                    <div class="col-sm-5">
+                        <input name="code" id="code" type="text" class="form-control" placeholder=""
+                               ms-attr-value="data.code">
+                    </div>
+                    <label for="codeName" class="col-sm-1 control-label requiredMask">名称</label>
+                    <div class="col-sm-5">
+                        <input id="codeName" name="codeName" type="text" class="form-control" placeholder=""
+                               ms-attr-value="data.codeName">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description" class="col-sm-1 control-label requiredMask">详情描述</label>
+                    <div class="col-sm-5">
+                        <textarea name="description" id="description" class="form-control" rows="3" placeholder=" ..."
+                                  ms-attr-value="data.description"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" name="id" ms-attr-value="data.id"/>
+    </form>
+
+</section>
+<script src="paramcode-edit.js"></script>

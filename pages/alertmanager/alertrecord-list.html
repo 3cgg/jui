@@ -1,0 +1,226 @@
+	 <!-- Main content -->
+    <section class="content"   id="searchAlertRecordSection"   ms-controller="alertRecord_view">
+      
+      <div class="box box-info">
+      	<div class="box-header with-border">
+          <h3 class="box-title"></h3>
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+          </div>
+        </div>
+              <div class="box-body">
+              <form class="form-horizontal"  id="searchAlertRecordForm">
+              	
+              	<div class="form-group">
+              	
+              	   <label for="alertItemId" class="col-sm-1 control-label">alertItemId</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="alertItemId" class="form-control" id="alertItemId">
+                  </div>
+              	  
+					
+              	
+              	   <label for="recordTime" class="col-sm-1 control-label">记录时间</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="recordTime" class="form-control" id="recordTime">
+                  </div>
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="recordTimeStart" class="col-sm-1 control-label">recordTimeStart</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="recordTimeStart" class="form-control" id="recordTimeStart">
+                  </div>
+              	  
+					
+              	
+              	   <label for="recordTimeEnd" class="col-sm-1 control-label">recordTimeEnd</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="recordTimeEnd" class="form-control" id="recordTimeEnd">
+                  </div>
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="data" class="col-sm-1 control-label">data</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="data" class="form-control" id="data">
+                  </div>
+              	  
+					
+              	
+              	   <label for="primary" class="col-sm-1 control-label">primary</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="primary" class="form-control" id="primary">
+                  </div>
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="description" class="col-sm-1 control-label">描述</label>
+                  <div class="col-sm-8">
+                    <input type="text"  name="description" class="form-control" id="description">
+                  </div>
+              	  
+					
+              	
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="createTimeStart" class="col-sm-1 control-label">创建时间（起）</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="createTimeStart" class="form-control" id="createTimeStart">
+                  </div>
+              	  
+					
+              	
+              	   <label for="createTimeEnd" class="col-sm-1 control-label">创建时间（止）</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="createTimeEnd" class="form-control" id="createTimeEnd">
+                  </div>
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="updateTimeStart" class="col-sm-1 control-label">更新时间（起）</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="updateTimeStart" class="form-control" id="updateTimeStart">
+                  </div>
+              	  
+					
+              	
+              	   <label for="updateTimeEnd" class="col-sm-1 control-label">更新时间（止）</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="updateTimeEnd" class="form-control" id="updateTimeEnd">
+                  </div>
+              	  
+              	</div>
+					
+				<div class="form-group">
+                	<label for="desc" class="col-sm-1 control-label"></label>
+                	<div class="col-sm-2 col-lg-1">
+	                	<input id="searchAlertRecordBtn" type="button" class="form-control btn-primary"  value="查询"   >
+	                </div>
+                </div>
+                </form>
+              </div>
+          </div>
+          <!-- /.box -->
+      
+    	
+    	<div class="box box-info">
+	    	<!--   .box-header   -->
+	        <div class="box-header with-border">
+	          <button type="submit" class="btn btn-primary btn-sm"
+	          onclick='$(this).goView("/pages/alertmanager/alertrecord-add.html");'
+	          >新增</button>
+	          <div class="box-tools pull-right">
+	            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+	          </div>
+	          
+	        </div>
+	        <!-- /.box-header -->
+	        <div class="box-body" >
+	          <table id="alertRecordListTable" 
+	          		class="" 
+	          			cellspacing="0" width="100%">
+	            <thead>
+					<tr>
+		              	<th></th>
+						
+						<th>alertItemId</th>
+						<th>记录时间</th>
+						<th>data</th>
+						<th>描述</th>
+						<th>primary</th>
+						<th></th>
+					</tr>
+				</thead>
+            </table>
+	          
+	          
+	          <!-- /.row -->
+	        </div>
+      </div>
+    
+    </section>
+    <script type="text/javascript">
+    $_youapp.ready(function() {
+    	
+    	var page=$.extend({
+    		root:$("#searchAlertRecordSection"),
+    		model:{
+    			vm:avalon.define({
+    		        $id: "alertRecord_view",
+    		        data: {}
+    		    })
+    		}
+    	},$_youapp.pageTemplate);
+    	
+    	page.listTable=page.root.find('#alertRecordListTable').initDataTable({
+			url:"/alertmanager/getAlertRecordsByPage",
+			urlDataFn:function(){
+				return page.root.find("#searchAlertRecordForm").serializeObj();
+			},
+			lengthChange:false,
+			checkbox:true,
+			ops:{
+				view:function(id,rowData){
+                    page.root.find('#alertRecordListTable').goView('/pages/alertmanager/alertrecord-view.html',{"id":id});
+				},
+				edit:function(id,rowData){
+					page.root.find('#alertRecordListTable').goView('/pages/alertmanager/alertrecord-edit.html',{"id":id});
+				},
+				del:function(id,rowData){
+					page.ajaxGet({
+						  url:'/alertmanager/deleteAlertRecordById',
+						  formData:{'id':id},
+						  success:function(data){
+							  page.listTable.ajax.reload();
+						  }
+						});
+				}
+			},
+			columns : [
+			
+			{
+				"data" : "alertItemId",
+				"width": "10%"
+			}
+			,
+			{
+				"data" : "recordTime",
+				"width": "10%"
+			}
+			,
+			{
+				"data" : "data",
+				"width": "10%"
+			}
+			,
+			{
+				"data" : "description",
+				"width": "20%"
+			}
+			,
+			{
+				"data" : "primary",
+				"width": "10%"
+			}
+			]
+		});
+		
+		page.root.find("#searchAlertRecordBtn").on("click",function(){
+			page.listTable.ajax.reload();
+		})
+		
+	});
+	</script>
+

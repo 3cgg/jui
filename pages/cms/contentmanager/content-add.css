@@ -1,0 +1,22 @@
+.editor-cover{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;background-color: #fff;
+    opacity: .5;text-align: center;
+    padding: 100px;
+}
+
+.editor-cover-btn{
+    width: 114px;
+    height: 114px;
+    padding: 35px;
+    border: #ccbcbc solid 1px;
+    color: #000000;
+}
+.editor-cover-btn:hover{
+    color: #ffffff;
+}

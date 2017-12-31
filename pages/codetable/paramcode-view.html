@@ -1,0 +1,56 @@
+<!-- Main content -->
+<section class="content" id="viewParamCodeSection" ms-controller="paramcode_view">
+
+    <div class="box box-bys-btn">
+        <div class="box-footer">
+            <button type="button" class="btn btn-primary btn-sm"
+                    onclick='$(this).goView("/pages/codetable/paramcode-list.html");'
+            >返回
+            </button>
+            <div class="box-tools pull-right">
+                字典编码信息明细
+            </div>
+        </div>
+    </div>
+
+    <div class="box box-bys-content">
+        <!--   .box-header   -->
+        <!--<div class="box-header with-border">-->
+        <!--<h3 class="box-title">字典编码信息明细</h3>-->
+        <!--<div class="box-tools pull-right">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!-- /.box-header -->
+
+        <div class="box-body form-horizontal">
+            <div class="form-group">
+                <label for="code" class="col-sm-1 control-label">编码</label>
+                <div class="col-sm-5">
+                    <span id="code" class="form-control label-form-control">{{data.code}}</span>
+                </div>
+                <label for="codeName" class="col-sm-1 control-label">名称</label>
+                <div class="col-sm-5">
+                    <span id="codeName" class="form-control label-form-control">{{data.codeName}}</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="typeName" class="col-sm-1 control-label">类型</label>
+                <div class="col-sm-5">
+                    <span id="typeName" class="form-control label-form-control">{{data.type}}({{data.typeName}})</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="description" class="col-sm-1 control-label">详情描述</label>
+                <div class="col-sm-5">
+                    <span id="description" class="form-control label-form-control">{{data.description}}</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<script src="paramcode-view.js"></script>
+	
+

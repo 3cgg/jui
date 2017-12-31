@@ -1,0 +1,115 @@
+	 <!-- Main content -->
+    <section class="content"  id="addBillSection" >
+    
+    	<form role="form"  id="addBillForm"  class="form-horizontal">
+    	
+    	<div class="box box-info">
+	        <div class="box-footer">
+	          <button type="submit" class="btn btn-primary">提交</button>
+	          <button type="button" class="btn btn-primary"
+	          onclick='$(this).goView("/pages/billmanager/bill-list.html");'
+	          >返回</button>
+	        </div> 
+      </div>
+    	
+    	<div class="box box-info">
+	    	<!--   .box-header   -->
+	        <div class="box-header with-border">
+	          <h3 class="box-title">账单信息新增</h3>
+	          <div class="box-tools pull-right">
+	          </div>
+	        </div>
+	        <!-- /.box-header -->
+	        
+	        <div class="box-body">
+             	<div class="form-group">
+                  <label for="billName" class="col-sm-1 control-label">账单名称</label>
+                  <div class="col-sm-5">
+                    <input type="text"   name="billName" id="billName"  class="form-control" >
+                  </div>
+                  <label for="billType" class="col-sm-1 control-label">账单类型</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="billType"  id="billType"  class="form-control" >
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="money" class="col-sm-1 control-label">Money</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="money"  id="money"  class="form-control" >
+                  </div>
+                  <label for="billTime" class="col-sm-1 control-label">Bill Time</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="billTime"  id="billTime"  class="form-control" >
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="mallName" class="col-sm-1 control-label">地址</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="mallName"  id="mallName"  class="form-control" >
+                  </div>
+                  <label for="description" class="col-sm-1 control-label">描述</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="description"  id="description"  class="form-control" >
+                  </div>
+                </div>
+	        </div>
+      </div>
+    </form>
+    
+    </section>
+	
+	
+	<script type="text/javascript">
+		
+		$_youapp.ready(function (){
+			
+			var page=$.extend({
+	    		root:$("#addBillSection"),
+	    		comp:"",
+	    		model:{
+	    		}
+	    	},$_youapp.pageTemplate);
+			
+			page.root.find("#addBillForm").validate({
+					rules: {
+						'billName': {
+							   required: true,
+							   maxlength:64
+						   },
+						'billType': {
+							   required: true,
+							   maxlength:64
+						   },
+						'money': {
+							   required: true,
+							   number:true
+						   },
+						'billTime': {
+							   required: true,
+							   maxlength:64
+						   },
+					   'mallName': {
+						   required: true,
+						   maxlength:128
+					   },
+					   'description': {
+						   required: true,
+						   maxlength:2000
+					   }
+					  },
+					  submitHandler:function(form){
+						  page.submitForm({
+							  url:page.comp+'/bill/billmanager/saveBill',
+							  formSelector:form,
+							  success:function(data){
+								  page.root.goView('/pages/billmanager/bill-list.html');
+							  }
+							});
+					 }
+				})
+		});
+	</script>
+
+

@@ -1,0 +1,103 @@
+<!-- Main content -->
+<section class="content" id="viewGroupSection" ms-controller="group_view">
+
+    <div class="box box-bys-btn">
+        <div class="box-footer">
+            <button type="button" class="btn btn-primary btn-sm"
+                    onclick='$(this).goView("/pages/groupmanager/group-list.html");'
+            >返回
+            </button>
+            <div class="box-tools pull-right">
+                组信息明细
+            </div>
+        </div>
+    </div>
+
+    <div class="box box-bys-content">
+        <!--   .box-header   -->
+        <!--<div class="box-header with-border">-->
+        <!--<h3 class="box-title">组信息明细</h3>-->
+        <!--<div class="box-tools pull-right">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!-- /.box-header -->
+
+        <div class="box-body form-horizontal">
+            <div class="form-group">
+                <label for="groupCode" class="col-sm-1 control-label">编码</label>
+                <div class="col-sm-5">
+                    <span id="groupCode" class="form-control label-form-control">{{data.groupCode}}</span>
+                </div>
+                <label for="groupName" class="col-sm-1 control-label">名称</label>
+                <div class="col-sm-5">
+                    <span id="groupName" class="form-control label-form-control">{{data.groupName}}</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="description" class="col-sm-1 control-label">详情描述</label>
+                <div class="col-sm-5">
+                    <span id="description" class="form-control label-form-control">{{data.description}}</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="box box-follow">
+        <!--   .box-header   -->
+        <div class="box-header with-border">
+            <h3 class="box-title">角色</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+            </div>
+
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body" id="roleOnGroupList">
+            <table id="roleOnGroupListTable"
+                   class="table dataTable table-striped row-border cell-border "
+                   cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>编码</th>
+                    <th>名称</th>
+                    <th>描述</th>
+                </tr>
+                </thead>
+            </table>
+            <!-- /.row -->
+        </div>
+    </div>
+
+    <div class="box box-follow">
+        <!--   .box-header   -->
+        <div class="box-header with-border">
+            <h3 class="box-title">用户</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+            </div>
+
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body" id="userOnGroupList">
+            <table id="userOnGroupListTable"
+                   class="table dataTable table-striped row-border cell-border "
+                   cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>登录名</th>
+                    <th>名称</th>
+                    <th>状态</th>
+                    <th>注册时间</th>
+                </tr>
+                </thead>
+            </table>
+            <!-- /.row -->
+        </div>
+    </div>
+</section>
+<script src="group-view.js"></script>

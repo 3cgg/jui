@@ -1,0 +1,96 @@
+<!-- Main content -->
+<section class="content" id="searchResourceSection" ms-controller="resource_view">
+
+    <div class="box box-search">
+        <!--<div class="box-header with-border">-->
+        <!--<h3 class="box-title"></h3>-->
+        <!--<div class="box-tools pull-right">-->
+        <!--<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>-->
+        <!--</div>-->
+        <!--</div>-->
+        <div class="box-body">
+            <form class="form-horizontal" id="searchResourceForm">
+                <div class="form-group">
+                    <label for="url" class="col-sm-1 control-label">资源URL</label>
+                    <div class="col-sm-5">
+                        <input type="text" name="url" class="form-control" id="url" placeholder="用户名">
+                    </div>
+
+                    <label for="friendlyUrl" class="col-sm-1 control-label">Friendly Url</label>
+                    <div class="col-sm-5">
+                        <input type="text" name="friendlyUrl" class="form-control" id="friendlyUrl"
+                               placeholder="friendly url">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cached" class="col-sm-1 control-label">是否缓存</label>
+                    <div class="col-sm-5">
+                        <select id="cached" name="cached" class="form-control select2 codetable"
+                                data-codeType="IS_CACHE" data-codeAlter>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description" class="col-sm-1 control-label">描述</label>
+                    <div class="col-sm-11">
+                        <input type="text" name="description" class="form-control" id="description" placeholder="描述">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="searchResourceBtn" class="col-sm-1 control-label"></label>
+                    <div class="col-sm-2 col-lg-1">
+                        <input id="searchResourceBtn" type="button" class="form-control btn-primary" value="查询">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- /.box -->
+
+
+    <div class="box box-result">
+        <!--   .box-header   -->
+        <div class="box-header with-border">
+            <button type="button" class="btn btn-primary btn-sm" id="refreshResourceBtn"
+            >刷新资源
+            </button>
+            <button type="button" class="btn btn-primary btn-sm" id="openCacheBtn"
+            >打开缓存
+            </button>
+            <button type="button" class="btn btn-primary btn-sm" id="closeCacheBtn"
+            >关闭缓存
+            </button>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+            </div>
+
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table id="resourceListTable"
+                   class="table dataTable table-striped row-border cell-border "
+                   cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>主键</th>
+                    <th>资源URL</th>
+                    <th>Friendly URL</th>
+                    <th>是否缓存</th>
+                    <th>描述</th>
+                </tr>
+                </thead>
+            </table>
+
+
+            <!-- /.row -->
+        </div>
+    </div>
+
+</section>
+<script src="resource-list.js"></script>
+

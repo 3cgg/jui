@@ -1,0 +1,197 @@
+	 <!-- Main content -->
+    <section class="content"  id="editContentSection"  ms-controller="content_edit">
+    	<div class="box box-bys-btn">
+	        <div class="box-footer">
+	          <button type="submit" class="btn btn-primary btn-sm"  id="editContentBtn"  >提交</button>
+	          <button type="button" class="btn btn-primary btn-sm"
+	          onclick='$(this).goView("/pages/cms/contentmanager/content-list.html");'
+	          >返回</button>
+                <div class="box-tools pull-right">
+                    修改
+                </div>
+	        </div> 
+      </div>
+    	
+    	<div class="box box-bys-content">
+	    	<!--   .box-header   -->
+	        <!-- /.box-header -->
+	        
+	        <div class="box-body">
+	        <form role="form"  id="editContentForm"  class="form-horizontal">
+              	<div class="form-group">
+              	
+              	   <label for="title" class="col-sm-1 control-label">标题</label>
+                   <div class="col-sm-5">
+                    <input id="title" name="title" ms-attr-value="data.title"   type="text"  class="form-control" >
+                  </div>
+              	  
+					
+              	
+              	   <label for="author" class="col-sm-1 control-label">作者</label>
+                   <div class="col-sm-5">
+                    <input id="author" name="author" ms-attr-value="data.author"   type="text"  class="form-control" >
+                  </div>
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="publishTime" class="col-sm-1 control-label">发布时间</label>
+                   <div class="col-sm-5">
+                  </div>
+              	  
+					
+              	
+              	   <label for="source" class="col-sm-1 control-label">来源</label>
+                   <div class="col-sm-5">
+                    <input id="source" name="source" ms-attr-value="data.source"   type="text"  class="form-control" >
+                  </div>
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="link" class="col-sm-1 control-label">源地址（http://）</label>
+                   <div class="col-sm-5">
+                    <input id="link" name="link" ms-attr-value="data.link"   type="text"  class="form-control" >
+                  </div>
+              	  
+					
+              	
+              	   <label for="overview" class="col-sm-1 control-label">简介</label>
+                   <div class="col-sm-5">
+                    <input id="overview" name="overview" ms-attr-value="data.overview"   type="text"  class="form-control" >
+                  </div>
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="adImg" class="col-sm-1 control-label">宣传图</label>
+                   <div class="col-sm-5">
+                    <input id="adImg" name="adImg" ms-attr-value="data.adImg"   type="text"  class="form-control" >
+                  </div>
+              	  
+					
+              	
+              	   <label for="content" class="col-sm-1 control-label">内容</label>
+                   <div class="col-sm-5">
+                    <input id="content" name="content" ms-attr-value="data.content"   type="text"  class="form-control" >
+                  </div>
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="sequence" class="col-sm-1 control-label">顺序</label>
+                   <div class="col-sm-5">
+                    <input id="sequence" name="sequence" ms-attr-value="data.sequence"   type="text"  class="form-control" >
+                  </div>
+              	  
+					
+              	
+              	  
+              	</div>
+					
+			
+			<input type="hidden"  name="id"  ms-attr-value="data.id"  />
+    		
+    		</form>
+	          <!-- /.row -->
+	        </div>
+      </div>
+      
+    
+    </section>
+	<script type="text/javascript">
+    
+    $_youapp.ready(function(){
+    	
+    	var page=$.extend({
+    		root:$("#editContentSection"),
+    		model:{
+    			vm:avalon.define({
+    		        $id: "content_edit",
+    		        data: {}
+    		    })
+    		}
+    	},$_youapp.pageTemplate);
+    	
+    	avalon.scan(page.root[0], page.model.vm);  // void braces
+    	
+    	function getId(){
+        	return page.root.getViewParam().id;
+        }
+    	
+    	page.ajaxGet({
+			  url:'/contentmanager/getContentById',
+			  formData:{'id':getId()},
+			  success:function(data){
+				  page.model.vm.data=data;
+		  		  avalon.scan(page.root[0], page.model.vm);
+			  }
+		});
+    	
+    	page.root.find("#editContentForm").validate({
+ 			rules: {
+				'title': {
+					   required: true,
+					   maxlength:64
+				   }
+				,
+				'author': {
+					   required: true,
+					   maxlength:64
+				   }
+				,
+				'publishTime': {
+					   required: true,
+					   maxlength:64
+				   }
+				,
+				'source': {
+					   required: true,
+					   maxlength:64
+				   }
+				,
+				'link': {
+					   required: true,
+					   maxlength:64
+				   }
+				,
+				'overview': {
+					   required: true,
+					   maxlength:64
+				   }
+				,
+				'adImg': {
+					   required: true,
+					   maxlength:64
+				   }
+				,
+				'content': {
+					   required: true,
+					   maxlength:64
+				   }
+				,
+				'sequence': {
+					   required: true,
+					   maxlength:64
+				   }
+ 			  },
+ 			  submitHandler:function(form){
+ 				  page.submitForm({
+ 					  url:'/contentmanager/updateContent',
+ 					  formSelector:form,
+ 					  success:function(data){
+ 						  page.root.goView('/pages/cms/contentmanager/content-list.html');
+ 					  }
+ 					});
+ 			  
+ 			  } 
+ 		});
+    	page.root.find('#editContentBtn').on('click',function(){
+			page.root.find("#editContentForm").submit();
+		});
+    });
+    </script>

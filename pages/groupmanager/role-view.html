@@ -1,0 +1,104 @@
+<!-- Main content -->
+<section class="content" id="viewRoleSection" ms-controller="role_view">
+
+    <div class="box box-bys-btn">
+        <div class="box-footer">
+            <button type="button" class="btn btn-primary btn-sm"
+                    onclick='$(this).goView("/pages/groupmanager/role-list.html");'
+            >返回
+            </button>
+            <div class="box-tools pull-right">
+                角色信息明细
+            </div>
+        </div>
+    </div>
+
+    <div class="box box-bys-content">
+        <!--   .box-header   -->
+        <!--<div class="box-header with-border">-->
+        <!--<h3 class="box-title">角色信息明细</h3>-->
+        <!--<div class="box-tools pull-right">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!-- /.box-header -->
+
+        <div class="box-body form-horizontal">
+            <div class="form-group">
+                <label for="roleCode" class="col-sm-1 control-label">编码</label>
+                <div class="col-sm-5">
+                    <span id="roleCode" class="form-control label-form-control">{{data.roleCode}}</span>
+                </div>
+                <label for="roleName" class="col-sm-1 control-label">名称</label>
+                <div class="col-sm-5">
+                    <span id="roleName" class="form-control label-form-control">{{data.roleName}}</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="description" class="col-sm-1 control-label">详情描述</label>
+                <div class="col-sm-5">
+                    <span id="description" class="form-control label-form-control">{{data.description}}</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="box box-follow">
+        <!--   .box-header   -->
+        <div class="box-header with-border">
+            <h3 class="box-title">角色所属组</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+            </div>
+
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body" id="groupOnRoleList">
+            <table id="groupOnRoleListTable"
+                   class="table dataTable table-striped row-border cell-border "
+                   cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>主键</th>
+                    <th>编码</th>
+                    <th>名称</th>
+                    <th>描述</th>
+                </tr>
+                </thead>
+            </table>
+            <!-- /.row -->
+        </div>
+    </div>
+
+    <div class="box box-follow">
+        <!--   .box-header   -->
+        <div class="box-header with-border">
+            <h3 class="box-title">用户</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+            </div>
+
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body" id="userOnRoleList">
+            <table id="userOnRoleListTable"
+                   class="table dataTable table-striped row-border cell-border "
+                   cellspacing="0" width="100%">
+                <thead>
+                <tr>
+                    <th>登录名</th>
+                    <th>名称</th>
+                    <th>状态</th>
+                    <th>注册时间</th>
+                </tr>
+                </thead>
+            </table>
+            <!-- /.row -->
+        </div>
+    </div>
+</section>
+<script src="role-view.js"></script>
