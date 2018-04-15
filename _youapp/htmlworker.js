@@ -23,6 +23,7 @@ $_youapp.$_htmlWorker=(function () {
             $.each($html,function (i,e) {
                 var nodeName=e.nodeName;
                 if(('SCRIPT'==nodeName||'script'==nodeName)&&$(e).attr('src')!=undefined){
+                    debugger;
                     var defaultRelative=requsetVO.htmlUrl.substring(0,requsetVO.htmlUrl.lastIndexOf('/'));
                     var absolute=$_youapp.$_config.getHtmlEndpoint()+ "/"+defaultRelative+"/"+$(e).attr('src');
                     var id=$.md5(absolute);
@@ -32,10 +33,16 @@ $_youapp.$_htmlWorker=(function () {
 
 
             $html.find('script').each(function (i ,e) {
-                var defaultRelative=requsetVO.htmlUrl.substring(0,requsetVO.htmlUrl.lastIndexOf('/'));
-                var absolute=$_youapp.$_config.getHtmlEndpoint()+"/"+defaultRelative+"/"+$(e).attr('src');
-                var id=$.md5(absolute);
-                $(e).attr('src',absolute).attr('id' ,id);
+                if($(e).attr('src')!=undefined){
+                    var defaultRelative=requsetVO.htmlUrl.substring(0,requsetVO.htmlUrl.lastIndexOf('/'));
+                    var absolute=$_youapp.$_config.getHtmlEndpoint()+"/"+defaultRelative+"/"+$(e).attr('src');
+                    var srcText=$(e).attr('src');
+                    if(srcText.startWith("/")){
+                        absolute=$_youapp.$_config.getHtmlEndpoint()+srcText;
+                    }
+                    var id=$.md5(absolute);
+                    $(e).attr('src',absolute).attr('id' ,id);
+                }
             });
 
             return $html;
@@ -64,8 +71,12 @@ $_youapp.$_htmlWorker=(function () {
             });
 
             $html.find('link').each(function (i ,e) {
+                var hrefText=$(e).attr('href');
                 var defaultRelative=requsetVO.htmlUrl.substring(0,requsetVO.htmlUrl.lastIndexOf('/'));
                 var absolute=$_youapp.$_config.getHtmlEndpoint()+ "/"+defaultRelative+"/"+$(e).attr('href');
+                if(hrefText.startWith("/")){
+                    absolute=$_youapp.$_config.getHtmlEndpoint()+hrefText;
+                }
                 var id=$.md5(absolute);
                 $(e).attr('href',absolute).attr('id' ,id);
             });
