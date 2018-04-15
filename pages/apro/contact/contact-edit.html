@@ -20,7 +20,7 @@
 	        <form role="form"  id="editContactForm"  class="form-horizontal">
               	<div class="form-group">
               	
-              	   <label for="detail" class="col-sm-1 control-label">详情</label>
+              	   <label for="detail" class="col-sm-1 control-label">联系人信息</label>
 					<div class="col-sm-11 col-lg-11">
                         <textarea id="detail" name="detail" style="border: solid 1px #887c7c;height: 318px"
 								  class="form-control" rows="15" placeholder=" ..." readonly ms-attr-value="data.detail" ></textarea>
@@ -96,8 +96,8 @@
  					  url:'/contact/updateContact',
  					  formSelector:form,
  					  success:function(data){
- 						  page.root.goView('/pages/contact/contact-edit.html');
- 					  }
+                          page.root.goView('/pages/apro/contact/contact-edit.html');
+                      }
  					});
  			  
  			  } 

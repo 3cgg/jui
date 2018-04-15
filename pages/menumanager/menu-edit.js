@@ -8,7 +8,8 @@ $_youapp.ready(function () {
         model: {
             vm: avalon.define({
                 $id: "menu_edit",
-                data: {}
+                data: {},
+                pdata:{}
             })
         }
     }, $_youapp.pageTemplate);
@@ -19,14 +20,32 @@ $_youapp.ready(function () {
         return page.root.getViewParam().id;
     }
 
+    function parentShow(parentId) {
+        if(parentId){
+            page.ajaxGet({
+                url: '/menumanager/getMenuById',
+                formData: {'id': parentId},
+                success: function (data) {
+                    page.root.find('#parentMenuDiv').show();
+                    page.model.vm.pdata = data;
+                    avalon.scan(page.root[0], page.model.vm);
+                }
+            });
+        }
+
+    }
+
     page.ajaxGet({
         url: '/menumanager/getMenuById',
         formData: {'id': getId()},
         success: function (data) {
             page.model.vm.data = data;
             avalon.scan(page.root[0], page.model.vm);
+            parentShow(data.pid)
         }
     });
+
+
 
     page.root.find("#editMenuForm").validate({
         rules: {

@@ -64,5 +64,51 @@
         <input type="hidden" name="id" ms-attr-value="data.id"/>
     </form>
 
+
+    <div class="box box-follow" id="parentMenuDiv" style="display: none;">
+        <!--   .box-header   -->
+        <div class="box-header with-border">
+            <h3 class="box-title">上级菜单</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <!-- /.box-header -->
+
+        <div class="box-body">
+            <div class="form-group">
+                <label for="code" class="col-sm-1 control-label ">编码</label>
+                <div class="col-sm-5">
+                    <span name="code" class="form-control label-form-control">{{pdata.code}}</span>
+                </div>
+                <label for="name" class="col-sm-1 control-label requiredMask">名称</label>
+                <div class="col-sm-5">
+                    <span name="name" class="form-control label-form-control">{{pdata.name}}</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="sequence" class="col-sm-1 control-label ">顺序</label>
+                <div class="col-sm-5">
+                    <span name="sequence" class="form-control label-form-control">{{pdata.sequence}}</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="url" class="col-sm-1 control-label requiredMask">地址</label>
+                <div class="col-sm-5">
+                    <span name="url" class="form-control label-form-control">{{pdata.url}}</span>
+                </div>
+                <label for="description" class="col-sm-1 control-label requiredMask">描述</label>
+                <div class="col-sm-5">
+                    <span name="description" class="form-control label-form-control">{{pdata.description}}</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
 </section>
 <script src="menu-edit.js"></script>

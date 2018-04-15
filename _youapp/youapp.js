@@ -293,10 +293,10 @@
 		  				}
 		  				return;
 		  			}else{
-							if(options.success){
-								options.success(resp.data);
-							}
+						if(options.success){
+							options.success(resp.data);
 						}
+					}
 		  		}
 
 			});
@@ -362,17 +362,23 @@
 		  		success:function(data){
 		  			var resp=data;
 		  			if("SUCCESS"!=resp.status){
-							$_youapp.$_util.log('bys error : '+options.url);
+						$_youapp.$_util.log('bys error : '+options.url);
 		  				$_youapp.$_toast.error("error",resp.data);
 		  				if(options.failure){
 		  					options.failure(resp);
 		  				}
 		  				return;
 		  			}else{
-							if(options.success){
-								options.success(resp.data);
-							}
-						}
+                        var success=options.success;
+                        if(success.isProxy){
+                            success(data);
+                        }else{
+                            $_youapp.$_proxy.success(success)(resp.data)
+                        }
+                        // if(options.success){
+                        //     options.success(resp.data);
+                        // }
+					}
 				}
 			});
 		}
@@ -394,11 +400,7 @@
 				url:options.url,
 				formData:$_youapp.$_util.serializeObj(options.formSelector),
 				token:token,
-				success:function(data){
-					if(options.success){
-						options.success(data);
-					}
-		  		},
+				success:options.success,
 		  		failure:function(resp){
 		  			var $form=$(options.formSelector);
 		  			var layoutId=$_youapp.$_layout.getClosestLayoutId($form);
@@ -518,6 +520,28 @@
 				error:this.error
 			}
 		})();
+
+		$_youapp.$_proxy={
+
+            success:function (fn,heading,text) {
+
+				var inner= function(data){
+                    $_youapp.$_toast.success(heading?heading:"操作成功!",text?text:"");
+					fn(data);
+				}
+				inner.isProxy=true;
+				return inner;
+            },
+            error:function (fn,heading,text) {
+                var inner=  function(data){
+                    $_youapp.$_toast.error(heading?heading:"操作失败!",text?text:"")
+                    fn(data);
+                }
+                inner.isProxy=true;
+                return inner;
+            }
+		}
+
 
 		window.$_youapp.ready=function(func){
 			$(function(){
