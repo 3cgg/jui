@@ -1,0 +1,254 @@
+	 <!-- Main content -->
+    <section class="content"  id="editMatSection"  ms-controller="mat_edit">
+    	<div class="box box-bys-btn">
+	        <div class="box-footer">
+	          <button type="submit" class="btn btn-primary"  id="editMatBtn"  >提交</button>
+	          <button type="button" class="btn btn-primary"
+	          onclick='$(this).goView("/pages/apro/mat/mat-list.html");'
+	          >返回</button>
+                <div class="box-tools pull-right">
+                    修改
+                </div>
+	        </div> 
+      </div>
+    	
+    	<div class="box box-bys-content">
+	    	<!--   .box-header   -->
+	        <!-- /.box-header -->
+	        
+	        <div class="box-body">
+	        <form role="form"  id="editMatForm"  class="form-horizontal">
+              	<div class="form-group">
+              	
+              	   <label for="name" class="col-sm-1 control-label requiredMask">名称</label>
+                   <div class="col-sm-5">
+                    <input id="name" name="name" ms-attr-value="data.name"   type="text"  class="form-control" >
+                  </div>
+              	  
+					
+              	
+              	   <label for="code" class="col-sm-1 control-label requiredMask">品名</label>
+                   <div class="col-sm-5">
+                    <input id="code" name="code" ms-attr-value="data.code"   type="text"  class="form-control" >
+                  </div>
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="size" class="col-sm-1 control-label requiredMask">规格</label>
+                   <div class="col-sm-5">
+                    <input id="size" name="size" ms-attr-value="data.size"   type="text"  class="form-control" >
+                  </div>
+              	  
+					
+              	
+              	  
+              	</div>
+
+				<div class="form-group">
+
+					<label for="imgId" class="col-sm-1 control-label requiredMask">宣传图</label>
+					<div class="col-sm-5">
+						<div name="fileUploadDiv" id="adFileUploadDiv"></div>
+						<input id="imgId" name="imgId" type="text" class="form-control"
+							   style="width:0px;height: 0px;padding: 0px;" ms-attr-value="data.imgId" ></input>
+					</div>
+
+				</div>
+				<div class="form-group">
+
+					<label for="description" class="col-sm-1 control-label requiredMask">内容</label>
+					<!--<div class="col-sm-5">-->
+					<!--<div id="contentContainer" name="contentContainer" class="col-sm-11 col-lg-11" ></div>-->
+					<div class="col-sm-11 col-lg-11">
+                        <textarea id="description" name="description" style="border: solid 1px #887c7c;height: 318px"
+								  class="form-control" rows="15" placeholder=" ..." readonly ms-attr-value="data.description" ></textarea>
+						<div class="editor-cover">
+
+							<div style="">
+								<a id="contentEdit" href="#" class="btn editor-cover-btn hover-black-opacity" title="">
+									编辑
+								</a>
+								<a id="contentPreview" href="#" class="btn editor-cover-btn hover-black-opacity "
+								   title="">
+									查看
+								</a>
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+					
+			
+			<input type="hidden"  name="id"  ms-attr-value="data.id"  />
+    		
+    		</form>
+	          <!-- /.row -->
+	        </div>
+      </div>
+      
+    
+    </section>
+	 <link rel="stylesheet" href="/pages/cms/contentmanager/content-add.css">
+	<script type="text/javascript">
+    
+    $_youapp.ready(function(){
+    	
+    	var page=$.extend({
+    		root:$("#editMatSection"),
+    		model:{
+    			vm:avalon.define({
+    		        $id: "mat_edit",
+    		        data: {}
+    		    })
+    		}
+    	},$_youapp.pageTemplate);
+    	
+    	avalon.scan(page.root[0], page.model.vm);  // void braces
+    	
+    	function getId(){
+        	return page.root.getViewParam().id;
+        }
+    	
+
+    	
+    	page.root.find("#editMatForm").validate({
+ 			rules: {
+                'name': {
+                    required: true,
+                    maxlength:64
+                }
+                ,
+                'code': {
+                    required: true,
+                    maxlength:64
+                }
+                ,
+                'size': {
+                    required: true,
+                    maxlength:64
+                }
+                ,
+                'imgId': {
+                    required: true,
+                    maxlength:64
+                },
+
+                'description': {
+                    required: true,
+                    maxlength:10000
+                }
+ 			  },
+ 			  submitHandler:function(form){
+ 				  page.submitForm({
+ 					  url:'/mat/updateMat',
+ 					  formSelector:form,
+ 					  success:function(data){
+ 						  page.root.goView('/pages/apro/mat/mat-list.html');
+ 					  }
+ 					});
+ 			  
+ 			  } 
+ 		});
+    	page.root.find('#editMatBtn').on('click',function(){
+			page.root.find("#editMatForm").submit();
+		});
+
+
+        page.root.find('#contentEdit').on('click',function () {
+            var $content=page.root.find('#description');
+            page.editorModal.open(page,
+                {	id:"contentEditorModal",
+                    title:"内容详情",
+                    hidden : function(txt){
+                        console.log("hide modal  "+ JSON.stringify(txt) );
+                        $content.val(txt.htmlContent);
+                    },
+                    opt:{
+                        width : '100%',
+                        height : '100%'
+                    }
+                },'/pages/cms/contentmanager/content-editor-pop.html',
+                {
+                    name : 'contentEditor',
+                    content : $content.val()
+                });
+        });
+
+        page.root.find('#contentPreview').on('click',function () {
+            var $content=page.root.find('#description');
+            page.editorModal.open(page,
+                {	id:"contentPreviewModal",
+                    title:"内容详情",
+                    hidden : function(txt){
+                        console.log("hide modal  "+ JSON.stringify(txt) );
+                        $content.val(txt.htmlContent);
+                    },
+                    opt:{
+                        width : '100%',
+                        height : '100%'
+                    }
+                },'/pages/cms/contentmanager/content-editor-pop.html',
+                {
+                    name : 'contentPreview',
+                    content : $content.val(),
+                    preview : true
+                });
+        });
+
+
+//			UE.delEditor('contentContainer');
+//
+//            var contentContainer = UE.getEditor('contentContainer',{
+//
+//
+//            });
+//
+//            $('#tabContainer').scroll(function (event) {
+//                var $this=$(event.target);
+//                var top=$this.scrollTop();
+//
+//                console.log(top)
+//
+//
+//            });
+
+        var adImgFile;
+
+        page.root.find('[name="fileUploadDiv"]').each(function(i,e){
+            var opt={
+                $fsc : $(e),
+                // $fc : page.root.find('#filesDiv'), // form container
+                added : function(data,obj){
+                    obj.opt.$fsc.parent().children('input').val(data.id);
+                },
+                removed : function(data,obj){
+                    obj.opt.$fsc.parent().children('input').val('');
+                },
+                types : ['image/jpeg','image/jpg','image/png']
+            }
+            adImgFile=fileAttach(opt);
+        });
+
+        page.ajaxGet({
+            url:'/mat/getMatById',
+            formData:{'id':getId()},
+            success:function(data){
+                page.model.vm.data=data;
+                avalon.scan(page.root[0], page.model.vm);
+                if(data.imgId&&data.imgId!=null&&data.imgId!=''){
+                    debugger;
+                    var data={
+                        id : data.imgId,
+                        uri : data.imgFile.uri
+                    }
+                    adImgFile.resetImg(data);
+                }
+            }
+        });
+
+
+    });
+    </script>

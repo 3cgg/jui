@@ -1,0 +1,94 @@
+	 <!-- Main content -->
+    <section class="content"   id="viewMatSection"   ms-controller="mat_view">
+    
+    	<div class="box box-bys-btn">
+	        <div class="box-footer">
+	          <button type="button" class="btn btn-primary"
+	          onclick='$(this).goView("/pages/apro/mat/mat-list.html");'
+	          >返回</button>
+                <div class="box-tools pull-right">
+                    明细
+                </div>
+	        </div> 
+      </div>
+    	
+    	<div class="box box-bys-content">
+	    	<!--   .box-header   -->
+	        <!-- /.box-header -->
+	        
+	        <div class="box-body form-horizontal">
+              	<div class="form-group">
+              	
+              	   <label for="name" class="col-sm-1 control-label">名称</label>
+                   <div class="col-sm-5">
+                   <span id="name"  class="form-control label-form-control">{{data.name}}</span>
+                  </div>
+              	  
+					
+              	
+              	   <label for="code" class="col-sm-1 control-label">品名</label>
+                   <div class="col-sm-5">
+                   <span id="code"  class="form-control label-form-control">{{data.code}}</span>
+                  </div>
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="size" class="col-sm-1 control-label">规格</label>
+                   <div class="col-sm-5">
+                   <span id="size"  class="form-control label-form-control">{{data.size}}</span>
+                  </div>
+              	  
+					
+              	
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="description" class="col-sm-1 control-label">描述</label>
+                   <div class="col-sm-8">
+                   <span id="description"  class="form-control label-form-control">{{data.description}}</span>
+                  </div>
+              	  
+					
+              	
+              	  
+              	</div>
+					
+	        </div>
+      </div>
+    </section>
+    <script type="text/javascript">
+    
+    $_youapp.ready(function(){
+    	
+    	var page=$.extend({
+    		root:$("#viewMatSection"),
+    		model:{
+    			vm:avalon.define({
+    		        $id: "mat_view",
+    		        data: {}
+    		    })
+    		}
+    	},$_youapp.pageTemplate);
+    	
+    	avalon.scan(page.root[0], page.model.vm);  // void braces
+    	
+    	function getId(){
+        	return page.root.getViewParam().id;
+        }
+    	
+    	page.ajaxGet({
+			  url:'/mat/getMatById',
+			  formData:{'id':getId()},
+			  success:function(data){
+				  page.model.vm.data=data;
+		  		  avalon.scan(page.root[0], page.model.vm);
+			  }
+			});
+    });
+    </script>
+	
+

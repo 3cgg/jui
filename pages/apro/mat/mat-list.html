@@ -1,0 +1,159 @@
+	 <!-- Main content -->
+    <section class="content"   id="searchMatSection"   ms-controller="mat_view">
+      
+      <div class="box box-search">
+              <div class="box-body">
+              <form class="form-horizontal"  id="searchMatForm">
+              	
+              	<div class="form-group">
+              	
+              	   <label for="name" class="col-sm-1 control-label">名称</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="name" class="form-control" id="name">
+                  </div>
+              	  
+					
+              	
+              	   <label for="code" class="col-sm-1 control-label">品名</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="code" class="form-control" id="code">
+                  </div>
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="size" class="col-sm-1 control-label">规格</label>
+                  <div class="col-sm-5">
+                    <input type="text"  name="size" class="form-control" id="size">
+                  </div>
+					<div class="col-sm-2 col-lg-1">
+						<input id="searchMatBtn" type="button" class="form-control btn-primary"  value="查询"   >
+					</div>
+					
+              	
+              	  
+              	</div>
+					
+              	<!--<div class="form-group">-->
+              	<!---->
+              	   <!--<label for="description" class="col-sm-1 control-label">描述</label>-->
+                  <!--<div class="col-sm-6">-->
+                    <!--<input type="text"  name="description" class="form-control" id="description">-->
+                  <!--</div>-->
+
+
+					<!--<div class="col-sm-2 col-lg-1">-->
+						<!--<input id="searchMatBtn" type="button" class="form-control btn-primary"  value="查询"   >-->
+					<!--</div>-->
+              	<!--</div>-->
+
+                </form>
+              </div>
+          </div>
+          <!-- /.box -->
+      
+    	
+    	<div class="box box-result">
+	    	<!--   .box-header   -->
+	        <div class="box-header with-border">
+	          <button type="submit" class="btn btn-primary btn-sm"
+	          onclick='$(this).goView("/pages/apro/mat/mat-add.html");'
+	          >新增</button>
+	          <div class="box-tools pull-right">
+	            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+	          </div>
+	          
+	        </div>
+	        <!-- /.box-header -->
+	        <div class="box-body" >
+	          <table id="matListTable" 
+	          		class="" 
+	          			cellspacing="0" width="100%">
+	            <thead>
+					<tr>
+		              	<th></th>
+						
+						<th>名称</th>
+						<th>品名</th>
+						<th>规格</th>
+						<!--<th>描述</th>-->
+						<th></th>
+					</tr>
+				</thead>
+            </table>
+	          
+	          
+	          <!-- /.row -->
+	        </div>
+      </div>
+    
+    </section>
+    <script type="text/javascript">
+    $_youapp.ready(function() {
+    	
+    	var page=$.extend({
+    		root:$("#searchMatSection"),
+    		model:{
+    			vm:avalon.define({
+    		        $id: "mat_view",
+    		        data: {}
+    		    })
+    		}
+    	},$_youapp.pageTemplate);
+    	
+    	page.listTable=page.root.find('#matListTable').initDataTable({
+			url:"/mat/getMatsByPage",
+			urlDataFn:function(){
+				return page.root.find("#searchMatForm").serializeObj();
+			},
+			lengthChange:false,
+			checkbox:true,
+			ops:{
+//				view:function(id,rowData){
+//                    page.root.find('#matListTable').goView('/pages/apro/mat/mat-view.html',{"id":id});
+//				},
+				edit:function(id,rowData){
+					page.root.find('#matListTable').goView('/pages/apro/mat/mat-edit.html',{"id":id});
+				},
+				del:function(id,rowData){
+					page.ajaxPost({
+						  url:'/mat/deleteMatById',
+						  formData:{'id':id},
+						  success:function(data){
+							  page.listTable.ajax.reload();
+						  }
+						});
+				}
+			},
+			columns : [
+			
+			{
+				"data" : "name",
+				"width": "10%"
+			}
+			,
+			{
+				"data" : "code",
+				"width": "10%"
+			}
+			,
+			{
+				"data" : "size",
+				"width": "10%"
+			}
+//			,
+//			{
+//				"data" : "description",
+//				"width": "20%"
+//			}
+			]
+		});
+		
+		page.root.find("#searchMatBtn").on("click",function(){
+			page.listTable.ajax.reload();
+		})
+		
+	});
+	</script>
+

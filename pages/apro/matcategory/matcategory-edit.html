@@ -1,0 +1,120 @@
+	 <!-- Main content -->
+    <section class="content"  id="editMatCategorySection"  ms-controller="matCategory_edit">
+    	<div class="box box-bys-btn">
+	        <div class="box-footer">
+	          <button type="submit" class="btn btn-primary"  id="editMatCategoryBtn"  >提交</button>
+	          <button type="button" class="btn btn-primary"
+	          onclick='$(this).goView("/pages/apro/matcategory/matcategory-list.html");'
+	          >返回</button>
+                <div class="box-tools pull-right">
+                    修改
+                </div>
+	        </div> 
+      </div>
+    	
+    	<div class="box box-bys-content">
+	    	<!--   .box-header   -->
+	        <!-- /.box-header -->
+	        
+	        <div class="box-body">
+	        <form role="form"  id="editMatCategoryForm"  class="form-horizontal">
+              	<div class="form-group">
+              	
+              	   <label for="name" class="col-sm-1 control-label">名称</label>
+                   <div class="col-sm-5">
+                    <input id="name" name="name" ms-attr-value="data.name"   type="text"  class="form-control" >
+                  </div>
+              	  
+					
+              	
+              	   <label for="code" class="col-sm-1 control-label">编码</label>
+                   <div class="col-sm-5">
+                    <input id="code" name="code" ms-attr-value="data.code"   type="text"  class="form-control" >
+                  </div>
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="description" class="col-sm-1 control-label">描述</label>
+                   <div class="col-sm-8">
+                    <textarea id="description" name="description" ms-attr-value="data.description"  class="form-control" rows="3" ></textarea>
+                  </div>
+              	  
+					
+              	
+              	  
+              	</div>
+					
+			
+			<input type="hidden"  name="id"  ms-attr-value="data.id"  />
+    		
+    		</form>
+	          <!-- /.row -->
+	        </div>
+      </div>
+      
+    
+    </section>
+	<script type="text/javascript">
+    
+    $_youapp.ready(function(){
+    	
+    	var page=$.extend({
+    		root:$("#editMatCategorySection"),
+    		model:{
+    			vm:avalon.define({
+    		        $id: "matCategory_edit",
+    		        data: {}
+    		    })
+    		}
+    	},$_youapp.pageTemplate);
+    	
+    	avalon.scan(page.root[0], page.model.vm);  // void braces
+    	
+    	function getId(){
+        	return page.root.getViewParam().id;
+        }
+    	
+    	page.ajaxGet({
+			  url:'/matcategory/getMatCategoryById',
+			  formData:{'id':getId()},
+			  success:function(data){
+				  page.model.vm.data=data;
+		  		  avalon.scan(page.root[0], page.model.vm);
+			  }
+		});
+    	
+    	page.root.find("#editMatCategoryForm").validate({
+ 			rules: {
+				'name': {
+					   required: true,
+					   maxlength:64
+				   }
+				,
+				'code': {
+					   required: true,
+					   maxlength:64
+				   }
+				,
+				'description': {
+					   required: false,
+					   maxlength:2000
+				   }
+ 			  },
+ 			  submitHandler:function(form){
+ 				  page.submitForm({
+ 					  url:'/matcategory/updateMatCategory',
+ 					  formSelector:form,
+ 					  success:function(data){
+ 						  page.root.goView('/pages/apro/matcategory/matcategory-list.html');
+ 					  }
+ 					});
+ 			  
+ 			  } 
+ 		});
+    	page.root.find('#editMatCategoryBtn').on('click',function(){
+			page.root.find("#editMatCategoryForm").submit();
+		});
+    });
+    </script>
