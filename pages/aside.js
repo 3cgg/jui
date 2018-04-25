@@ -103,13 +103,13 @@ $_youapp.ready(function() {
     function setHeight(){
         var windowHeight=$(window).height();
         var menuHeight=$menu.position().top;
-        page.log('window-height: '+windowHeight);
-        page.log('menu-height: '+menuHeight);
+        // page.log('window-height: '+windowHeight);
+        // page.log('menu-height: '+menuHeight);
         var height=windowHeight-menuHeight;
         $menu.css({
             'height':height+'px'
         });
-        page.log(height)
+        // page.log(height)
     }
     setHeight();
 

@@ -34,4 +34,9 @@ $_youapp.ready(function() {
         }
     });
 
+    page.root.find('#logout-btn').on('click',function(){
+        $_youapp.$_ticket.removeTicket();
+        $_youapp.$_config.gotoLoginView();
+    });
+
 });

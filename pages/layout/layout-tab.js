@@ -18,14 +18,14 @@ $_youapp.ready(function() {
     function setHeight() {
         var windowHeight = $(window).height();
         var menuHeight = $menu.offset().top;
-        page.log('window-height: ' + windowHeight);
-        page.log('menu-height: ' + menuHeight);
+        // page.log('window-height: ' + windowHeight);
+        // page.log('menu-height: ' + menuHeight);
         var height = windowHeight - menuHeight;
         $menu.css({
             'height': height + 'px',
             'overflow-y': 'auto'
         });
-        page.log(height)
+        // page.log(height)
     }
 
     setTimeout(setHeight, 150);

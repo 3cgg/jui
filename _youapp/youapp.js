@@ -286,7 +286,13 @@
 		  		success:function(data){
 		  			var resp=data;
 		  			if("SUCCESS"!=resp.status){
-							$_youapp.$_util.log('bys error : '+options.url);
+                        $_youapp.$_util.log('bys error : '+options.url);
+		  				// goto login/html
+						if("BYS_ERROR"==resp.status
+							&&"No Authorised."==resp.data){
+                            $_youapp.$_config.gotoLoginView();
+							return;
+						}
 		  				$_youapp.$_toast.error("error",resp.data);
 							if(options.failure){
 		  					options.failure(resp);
@@ -363,6 +369,12 @@
 		  			var resp=data;
 		  			if("SUCCESS"!=resp.status){
 						$_youapp.$_util.log('bys error : '+options.url);
+                        // goto login/html
+                        if("BYS_ERROR"==resp.status
+                            &&"No Authorised."==resp.data){
+                            $_youapp.$_config.gotoLoginView();
+                            return;
+                        }
 		  				$_youapp.$_toast.error("error",resp.data);
 		  				if(options.failure){
 		  					options.failure(resp);
@@ -462,9 +474,13 @@
 			this.setTicket=function(ticket){
 				Cookies.set(getKey(),ticket);
 			}
+            this.removeTicket=function(ticket){
+                Cookies.remove(getKey());
+            }
 			return {
 				getTicket:this.getTicket,
-				setTicket:this.setTicket
+				setTicket:this.setTicket,
+                removeTicket:this.removeTicket
 			}
 		})();
 		window.$_youapp.$_toast=(function(){

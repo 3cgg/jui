@@ -27,6 +27,10 @@
 			//return getWebPath()+"/get/fileupload/";
 			return '_token';
 		}
+
+        this.gotoLoginView=function(){
+            location.href=this.getHtmlEndpoint()+"/pages/login.html";
+        }
 	}
 
 	window.$_youapp.$_config=new _Config();
