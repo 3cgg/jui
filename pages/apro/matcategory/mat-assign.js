@@ -42,7 +42,7 @@ $_youapp.ready(function(){
         urlDataFn:function(){
             return {
                 'categoryId':getId(),
-                'name' :titleOnBindContent()
+                'keyword' :titleOnBindContent()
             };
         },
 //			paging:false,
@@ -109,7 +109,7 @@ $_youapp.ready(function(){
         urlDataFn:function(){
             return {
                 'categoryId':getId(),
-                'name' :titleOnUnbindContent()
+                'keyword' :titleOnUnbindContent()
             };
         },
 //			paging:false,
