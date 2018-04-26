@@ -29,6 +29,8 @@
 	          <button type="submit" class="btn btn-primary btn-sm"
 	          onclick='$(this).goView("/pages/apro/matcategory/matcategory-add.html");'
 	          >新增</button>
+				<button id="btnAssign" type="button" class="btn btn-primary btn-sm"
+				>分配产品</button>
 	          <div class="box-tools pull-right">
 	            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
 	          </div>
@@ -115,7 +117,26 @@
 		
 		page.root.find("#searchMatCategoryBtn").on("click",function(){
 			page.listTable.ajax.reload();
-		})
+		});
+
+        function valid(ids) {
+            if (ids && ids.length == 0) {
+                page.warning('请选择一条记录');
+                return false;
+            }
+            if (ids && ids.length > 1) {
+                page.warning('只能选择一条记录');
+                return false;
+            }
+            return true;
+        }
+
+        page.root.find('#btnAssign').on('click', function() {
+            var ids = page.root.find('#matCategoryListTable').getSelectedRow();
+            if (valid(ids)) {
+                $(this).goView('/pages/apro/matcategory/mat-assign.html', {"id": ids[0]});
+            }
+        });
 		
 	});
 	</script>

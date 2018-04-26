@@ -1,0 +1,143 @@
+	 <!-- Main content -->
+    <section class="content"  id="bindMatSection"  ms-controller="mat_assign_view">
+
+		<div class="box box-bys-btn">
+			<div class="box-footer">
+				<button type="button" class="btn btn-primary"
+						onclick='$(this).goView("/pages/apro/matcategory/matcategory-list.html");'
+				>返回</button>
+				<div class="box-tools pull-right">
+					明细
+				</div>
+			</div>
+		</div>
+
+		<div class="box box-bys-content">
+			<!--   .box-header   -->
+			<!-- /.box-header -->
+
+			<div class="box-body form-horizontal">
+				<div class="form-group">
+
+					<label for="name" class="col-sm-1 control-label">名称</label>
+					<div class="col-sm-5">
+						<span id="name"  class="form-control label-form-control">{{data.name}}</span>
+					</div>
+
+
+
+					<label for="code" class="col-sm-1 control-label">编码</label>
+					<div class="col-sm-5">
+						<span id="code"  class="form-control label-form-control">{{data.code}}</span>
+					</div>
+
+				</div>
+
+				<div class="form-group">
+
+					<label for="description" class="col-sm-1 control-label">描述</label>
+					<div class="col-sm-8">
+						<span id="description"  class="form-control label-form-control">{{data.description}}</span>
+					</div>
+				</div>
+
+				<input type="hidden"  name="id"  ms-attr-value="data.id"  />
+
+			</div>
+		</div>
+
+    <div class="box box-follow">
+	    	<!--   .box-header   -->
+	        <div class="box-header with-border">
+	          <h3 class="box-title">内容</h3>
+	          <div class="box-tools pull-right">
+	          		<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+	          </div>
+	        </div>
+	        <!-- /.box-header -->
+
+	        <div class="box-body form-horizontal">
+		   		<div class="col-md-6"  style="padding-left: 0px;">
+
+      <div class="box box-follow" >
+	    	<!--   .box-header   -->
+	        <div class="box-header with-border">
+			  <h3 class="box-title">已绑定内容</h3>
+	          <div class="box-tools pull-right">
+	            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+	          </div>
+
+	        </div>
+	        <!-- /.box-header -->
+	        <div class="box-body" >
+				<div class="col-lg-4 col-ms-12 col-md-4" style="position: relative;float: right;padding-right:0px;">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Search for..." id="titleOnBindContent">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button" id="searchBindContentBtn">Go!</button>
+						  </span>
+					</div><!-- /input-group -->
+				</div><!-- /.col-lg-6 -->
+				<!--<div style="clear: both;"></div>-->
+	          <table id="contentOnColListTable"
+	          		class="table dataTable table-striped row-border cell-border "
+	          			cellspacing="0" width="100%">
+	            <thead>
+					<tr>
+						<th></th>
+						<th>品名</th>
+						<th>规格</th>
+					</tr>
+				</thead>
+            </table>
+	          <!-- /.row -->
+	        </div>
+      </div>
+      </div>
+
+      <div class="col-md-6"  style="padding-left: 0px; padding-right: 0px;">
+
+      <div class="box box-follow" >
+	    	<!--   .box-header   -->
+	        <div class="box-header with-border">
+			  <h3 class="box-title">未绑定内容</h3>
+	          <div class="box-tools pull-right">
+	            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+	          </div>
+
+	        </div>
+	        <!-- /.box-header -->
+	        <div class="box-body" >
+				<div class="col-lg-4 col-ms-12 col-md-4" style="position: relative;float: right;padding-right:0px;">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Search for..." id="titleOnUnbindContent">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button" id="searchUnbindContentBtn">Go!</button>
+						  </span>
+					</div><!-- /input-group -->
+				</div><!-- /.col-lg-6 -->
+
+	          <table id="contentNotOnColListTable"
+	          		class="table dataTable table-striped row-border cell-border "
+	          			cellspacing="0" width="100%">
+	            <thead>
+					<tr>
+						<th></th>
+						<th>品名</th>
+						<th>规格</th>
+					</tr>
+				</thead>
+            </table>
+	          <!-- /.row -->
+	        </div>
+      </div>
+      </div>
+
+		   </div>
+		  </div>
+
+
+
+
+    </section>
+	<script src="mat-assign.js"></script>

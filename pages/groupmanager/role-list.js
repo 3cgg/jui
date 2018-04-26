@@ -38,11 +38,6 @@ $_youapp.ready(function () {
         },
         columns: [
             {
-                "data": "id",
-                "orderable": false,
-                "width": "10%"
-            },
-            {
                 "data": "roleCode",
                 "width": "10%"
             },

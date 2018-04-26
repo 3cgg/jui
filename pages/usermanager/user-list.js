@@ -39,11 +39,6 @@ $_youapp.ready(function () {
         },
         columns: [
             {
-                "data": "id",
-                "orderable": false,
-                "width": "10%"
-            },
-            {
                 "data": "userName",
                 "width": "10%"
             },

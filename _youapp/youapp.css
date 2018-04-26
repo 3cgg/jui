@@ -569,6 +569,9 @@ td.recordRemove {
   color: red;
 }
 
+.form-group{
+  margin-bottom: 5px;!important;
+}
 
 
 
