@@ -28163,7 +28163,7 @@ ul.todo-box {
 }
 
 #header-logo {
-    width: 260px;
+    width: 160px;
     text-align: center;
     font-size: 16px;
     float: left;
@@ -28388,7 +28388,7 @@ body #nav-toggle.collapsed span,body #nav-toggle.collapsed span:after,body #nav-
 }
 
 #page-sidebar {
-    width: 260px;
+    width: 160px;
     float: left;
     position: relative;
     margin-right: -100%;
@@ -28397,7 +28397,7 @@ body #nav-toggle.collapsed span,body #nav-toggle.collapsed span:after,body #nav-
 
 #sidebar-menu {
     margin: 0;
-    padding: 5px 20px;
+    padding: 5px 5px 5px 10px;
     list-style: none
 }
 
@@ -29339,7 +29339,7 @@ body .popover.left .arrow:after {
     }
 
     #page-content {
-        margin-left: 260px
+        margin-left: 160px
     }
 
     #page-sidebar.collapse {

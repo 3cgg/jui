@@ -44,42 +44,42 @@ $_youapp.ready(function () {
 
             {
                 "data": "title",
-                "width": "15%"
+                "width": "30%"
             }
             ,
             {
                 "data": "author",
-                "width": "5%"
+                "width": "10%"
             }
             ,
             {
                 "data": "publishTime",
-                "width": "10%"
+                "width": "15%"
             }
             ,
             {
                 "data": "source",
                 "width": "10%"
             }
-            ,
-            {
-                "data": "link",
-                "render": function (data, type, row, meta) {
-                    return '<span style="width: 27em;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;display: block ">'+data+'</span>'
-                }
-            }
-            ,
-            {
-                "data": "overview",
-                "render": function (data, type, row, meta) {
-                    return '<span style="width: 27em;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;display: block ">'+data+'</span>'
-                }
-            }
-            ,
-            {
-                "data": "sequence",
-                "width": "5%"
-            }
+            // ,
+            // {
+            //     "data": "link",
+            //     "render": function (data, type, row, meta) {
+            //         return '<span style="width: 27em;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;display: block ">'+data+'</span>'
+            //     }
+            // }
+            // ,
+            // {
+            //     "data": "overview",
+            //     "render": function (data, type, row, meta) {
+            //         return '<span style="width: 27em;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;display: block ">'+data+'</span>'
+            //     }
+            // }
+            // ,
+            // {
+            //     "data": "sequence",
+            //     "width": "5%"
+            // }
         ]
     });
 

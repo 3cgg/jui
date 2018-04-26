@@ -309,6 +309,7 @@ $.fn.extend({
 //		$wrap=$('#editable');
 		var $wrap=$(this.selector);
 		var dataTableObj= $(this.selector).DataTable({
+            // autoWidth: false,
 			paging:options.paging,
 			processing : options.processing,
 			serverSide : options.serverSide,
