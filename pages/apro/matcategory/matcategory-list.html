@@ -4,12 +4,19 @@
       <div class="box box-search">
               <div class="box-body">
               <form class="form-horizontal"  id="searchMatCategoryForm">
-              	
-              	<div class="form-group col-lg-6 col-md-12 col-sm-12" style="float: right" >
+				  <div class="form-group col-lg-6 col-md-6 col-sm-6 ">
+					  <label for="group" class="col-sm-2 control-label">分类组</label>
+					  <div class="col-sm-8">
+						  <select id="group" name="group" class="form-control select2 codetable" data-codeType="MAT_CATEGORY_GROUP" data-codeAlter>
+						  </select>
+					  </div>
+				  </div>
 
-					<div class="input-group">
-						<!--<label for="name" class="col-sm-1 control-label">名称</label>-->
-						<input type="text"  name="name" class="form-control" id="name" placeholder="分类名称、组名称">
+
+              	<div class="form-group col-lg-6 col-md-6 col-sm-6" >
+					<label for="name" class="col-sm-2 control-label">名称</label>
+					<div class="input-group col-sm-10 " style="width: auto!important;">
+						<input type="text"  name="name" class="form-control" id="name" placeholder="分类名称">
 						<span class="input-group-btn">
 							<input id="searchMatCategoryBtn" type="button" class="form-control btn-primary"  value="查询"   >
 						</span>
@@ -103,7 +110,7 @@
 			}
 			,
 			{
-				"data" : "group",
+				"data" : "groupName",
 				"width": "10%"
 			}
                 ,
@@ -136,7 +143,8 @@
                 $(this).goView('/pages/apro/matcategory/mat-assign.html', {"id": ids[0]});
             }
         });
-		
+
+        $_youapp.$_codeTable.draw(page.root.find('.codetable'));
 	});
 	</script>
 
