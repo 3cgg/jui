@@ -21,30 +21,34 @@
 	        <form role="form"  id="addMatCategoryForm"  class="form-horizontal">
               	<div class="form-group">
               	
-              	   <label for="name" class="col-sm-1 control-label">名称</label>
+              	   <label for="name" class="col-sm-1 control-label requiredMask">名称</label>
                    <div class="col-sm-5">
                     <input  id="name" name="name" type="text" class="form-control"></input>
                   </div>
               	  
 					
               	
-              	   <label for="code" class="col-sm-1 control-label">编码</label>
+              	   <label for="code" class="col-sm-1 control-label requiredMask">编码</label>
                    <div class="col-sm-5">
                     <input  id="code" name="code" type="text" class="form-control"></input>
                   </div>
               	  
               	</div>
+
+				<div class="form-group">
+					<label for="group" class="col-sm-1 control-label requiredMask">分类组</label>
+					<div class="col-sm-5">
+						<select id="group" name="group" class="form-control select2 codetable" data-codeType="MAT_CATEGORY_GROUP" data-codeAlter>
+						</select>
+					</div>
+				</div>
 					
               	<div class="form-group">
               	
-              	   <label for="description" class="col-sm-1 control-label">描述</label>
+              	   <label for="description" class="col-sm-1 control-label requiredMask">描述</label>
                    <div class="col-sm-8">
                     <textarea  id="description" name="description" class="form-control" rows="3" ></textarea>
                   </div>
-              	  
-					
-              	
-              	  
               	</div>
 					
     		</form>
@@ -76,6 +80,10 @@
 							   maxlength:64
 						   }
 						,
+                        'group': {
+                            required: true
+                        }
+                        ,
 						'description': {
 							   required: false,
 							   maxlength:2000
@@ -93,7 +101,10 @@
 				});
 			page.root.find('#addMatCategoryBtn').on('click',function(){
 				page.root.find("#addMatCategoryForm").submit();
-			});	
+			});
+
+            $_youapp.$_codeTable.draw(page.root.find('.codetable'));
+
 		});
 	</script>
 
