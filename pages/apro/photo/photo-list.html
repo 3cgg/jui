@@ -1,0 +1,116 @@
+	 <!-- Main content -->
+    <section class="content"   id="searchPhotoSection"   ms-controller="photo_view">
+      
+      <div class="box box-search">
+              <div class="box-body">
+              <form class="form-horizontal"  id="searchPhotoForm">
+
+				  <div class="form-group col-lg-6 col-md-6 col-sm-6" style="float: right;">
+					  <label for="description" class="col-sm-2 control-label">描述</label>
+					  <div class="input-group col-sm-10 " style="width: auto!important;">
+						  <input type="text"  name="description" class="form-control" id="description" placeholder="">
+						  <span class="input-group-btn">
+							<input id="searchPhotoBtn" type="button" class="form-control btn-primary"  value="查询"   >
+						</span>
+					  </div>
+
+				  </div>
+
+                </form>
+              </div>
+          </div>
+          <!-- /.box -->
+      
+    	
+    	<div class="box box-result">
+	    	<!--   .box-header   -->
+	        <div class="box-header with-border">
+	          <button type="submit" class="btn btn-primary btn-sm"
+	          onclick='$(this).goView("/pages/apro/photo/photo-add.html");'
+	          >新增</button>
+	          <div class="box-tools pull-right">
+	            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+	          </div>
+	          
+	        </div>
+	        <!-- /.box-header -->
+	        <div class="box-body" >
+	          <table id="photoListTable" 
+	          		class="" 
+	          			cellspacing="0" width="100%">
+	            <thead>
+					<tr>
+		              	<th></th>
+						<th>图片</th>
+						<th>描述</th>
+						<th></th>
+					</tr>
+				</thead>
+            </table>
+	          
+	          
+	          <!-- /.row -->
+	        </div>
+      </div>
+
+    </section>
+    <script type="text/javascript">
+    $_youapp.ready(function() {
+    	
+    	var page=$.extend({
+    		root:$("#searchPhotoSection"),
+    		model:{
+    			vm:avalon.define({
+    		        $id: "photo_view",
+    		        data: {}
+    		    })
+    		}
+    	},$_youapp.pageTemplate);
+    	
+    	page.listTable=page.root.find('#photoListTable').initDataTable({
+			url:"/photo/getPhotosByPage",
+			urlDataFn:function(){
+				return page.root.find("#searchPhotoForm").serializeObj();
+			},
+			lengthChange:false,
+			checkbox:true,
+			ops:{
+//				view:function(id,rowData){
+//                    page.root.find('#photoListTable').goView('/pages/apro/photo/photo-view.html',{"id":id});
+//				},
+				edit:function(id,rowData){
+					page.root.find('#photoListTable').goView('/pages/apro/photo/photo-edit.html',{"id":id});
+				},
+				del:function(id,rowData){
+					page.ajaxPost({
+						  url:'/photo/deletePhotoById',
+						  formData:{'id':id},
+						  success:function(data){
+							  page.listTable.ajax.reload();
+						  }
+						});
+				}
+			},
+			columns : [
+			{
+				"data" : "compressImg",
+				"width": "10%",
+                "render": function (data, type, row, meta) {
+                    return '<img src="'+row.imgFile.uri+'" style="width: 45px;height: 45px;">';
+                }
+			}
+			,
+			{
+				"data" : "description",
+				"width": "60%"
+			}
+			]
+		});
+		
+		page.root.find("#searchPhotoBtn").on("click",function(){
+			page.listTable.ajax.reload();
+		})
+		
+	});
+	</script>
+

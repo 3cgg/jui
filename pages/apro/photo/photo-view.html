@@ -1,0 +1,94 @@
+	 <!-- Main content -->
+    <section class="content"   id="viewPhotoSection"   ms-controller="photo_view">
+    
+    	<div class="box box-bys-btn">
+	        <div class="box-footer">
+	          <button type="button" class="btn btn-primary"
+	          onclick='$(this).goView("/pages/apro/photo/photo-list.html");'
+	          >返回</button>
+                <div class="box-tools pull-right">
+                    明细
+                </div>
+	        </div> 
+      </div>
+    	
+    	<div class="box box-bys-content">
+	    	<!--   .box-header   -->
+	        <!-- /.box-header -->
+	        
+	        <div class="box-body form-horizontal">
+              	<div class="form-group">
+              	
+              	   <label for="img" class="col-sm-1 control-label">img</label>
+                   <div class="col-sm-5">
+                   <span id="img"  class="form-control label-form-control">{{data.img}}</span>
+                  </div>
+              	  
+					
+              	
+              	   <label for="compressImg" class="col-sm-1 control-label">compressImg</label>
+                   <div class="col-sm-5">
+                   <span id="compressImg"  class="form-control label-form-control">{{data.compressImg}}</span>
+                  </div>
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="description" class="col-sm-1 control-label">描述</label>
+                   <div class="col-sm-8">
+                   <span id="description"  class="form-control label-form-control">{{data.description}}</span>
+                  </div>
+              	  
+					
+              	
+              	  
+              	</div>
+					
+              	<div class="form-group">
+              	
+              	   <label for="matId" class="col-sm-1 control-label">matId</label>
+                   <div class="col-sm-5">
+                   <span id="matId"  class="form-control label-form-control">{{data.matId}}</span>
+                  </div>
+              	  
+					
+              	
+              	  
+              	</div>
+					
+	        </div>
+      </div>
+    </section>
+    <script type="text/javascript">
+    
+    $_youapp.ready(function(){
+    	
+    	var page=$.extend({
+    		root:$("#viewPhotoSection"),
+    		model:{
+    			vm:avalon.define({
+    		        $id: "photo_view",
+    		        data: {}
+    		    })
+    		}
+    	},$_youapp.pageTemplate);
+    	
+    	avalon.scan(page.root[0], page.model.vm);  // void braces
+    	
+    	function getId(){
+        	return page.root.getViewParam().id;
+        }
+    	
+    	page.ajaxGet({
+			  url:'/photo/getPhotoById',
+			  formData:{'id':getId()},
+			  success:function(data){
+				  page.model.vm.data=data;
+		  		  avalon.scan(page.root[0], page.model.vm);
+			  }
+			});
+    });
+    </script>
+	
+

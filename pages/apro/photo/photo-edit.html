@@ -1,0 +1,165 @@
+	 <!-- Main content -->
+    <section class="content"  id="editPhotoSection"  ms-controller="photo_edit">
+    	<div class="box box-bys-btn">
+	        <div class="box-footer">
+	          <button type="submit" class="btn btn-primary"  id="editPhotoBtn"  >提交</button>
+	          <button type="button" class="btn btn-primary"
+	          onclick='$(this).goView("/pages/apro/photo/photo-list.html");'
+	          >返回</button>
+                <div class="box-tools pull-right">
+                    修改
+                </div>
+	        </div> 
+      </div>
+    	
+    	<div class="box box-bys-content">
+	    	<!--   .box-header   -->
+	        <!-- /.box-header -->
+	        
+	        <div class="box-body">
+	        <form role="form"  id="editPhotoForm"  class="form-horizontal">
+
+
+
+				<div class="form-group">
+
+					<label for="img" class="col-sm-1 control-label requiredMask">相册图片</label>
+					<div class="col-sm-5">
+						<div name="fileUploadDiv"></div>
+						<input id="img" name="img" type="text" class="form-control"
+							   style="width:0px;height: 0px;padding: 0px;"></input>
+					</div>
+
+				</div>
+
+
+              	<div class="form-group">
+              	
+              	   <label for="description" class="col-sm-1 control-label">描述</label>
+                   <div class="col-sm-8">
+                    <textarea id="description" name="description" ms-attr-value="data.description"  class="form-control" rows="3" ></textarea>
+                  </div>
+              	  
+					
+              	
+              	  
+              	</div>
+					
+              	<!--<div class="form-group">-->
+              	<!---->
+              	   <!--<label for="matId" class="col-sm-1 control-label">matId</label>-->
+                   <!--<div class="col-sm-5">-->
+                    <!--<input id="matId" name="matId" ms-attr-value="data.matId"   type="text"  class="form-control" >-->
+                  <!--</div>-->
+              	  <!---->
+					<!---->
+              	<!---->
+              	  <!---->
+              	<!--</div>-->
+					
+			
+			<input type="hidden"  name="id"  ms-attr-value="data.id"  />
+    		
+    		</form>
+	          <!-- /.row -->
+	        </div>
+      </div>
+      
+    
+    </section>
+	<script type="text/javascript">
+    
+    $_youapp.ready(function(){
+    	
+    	var page=$.extend({
+    		root:$("#editPhotoSection"),
+    		model:{
+    			vm:avalon.define({
+    		        $id: "photo_edit",
+    		        data: {}
+    		    })
+    		}
+    	},$_youapp.pageTemplate);
+    	
+    	avalon.scan(page.root[0], page.model.vm);  // void braces
+    	
+    	function getId(){
+        	return page.root.getViewParam().id;
+        }
+    	
+
+    	
+    	page.root.find("#editPhotoForm").validate({
+ 			rules: {
+				'img': {
+					   required: true,
+					   maxlength:64
+				   }
+				,
+//				'compressImg': {
+//					   required: true,
+//					   maxlength:64
+//				   }
+//				,
+				'description': {
+					   required: false,
+					   maxlength:2000
+				   }
+//				,
+//				'matId': {
+//					   required: true,
+//					   maxlength:64
+//				   }
+ 			  },
+ 			  submitHandler:function(form){
+ 				  page.submitForm({
+ 					  url:'/photo/updatePhoto',
+ 					  formSelector:form,
+ 					  success:function(data){
+ 						  page.root.goView('/pages/apro/photo/photo-list.html');
+ 					  }
+ 					});
+ 			  
+ 			  } 
+ 		});
+    	page.root.find('#editPhotoBtn').on('click',function(){
+			page.root.find("#editPhotoForm").submit();
+		});
+
+        var mgFile;
+
+        page.root.find('[name="fileUploadDiv"]').each(function(i,e){
+            var opt={
+                $fsc : $(e),
+                // $fc : page.root.find('#filesDiv'), // form container
+                added : function(data,obj){
+                    obj.opt.$fsc.parent().children('input').val(data.id);
+                },
+                removed : function(data,obj){
+                    obj.opt.$fsc.parent().children('input').val('');
+                },
+                types : ['image/jpeg','image/jpg','image/png']
+            }
+            imgFile=fileAttach(opt);
+        });
+
+        page.ajaxGet({
+            url:'/photo/getPhotoById',
+            formData:{'id':getId()},
+            success:function(data){
+                page.model.vm.data=data;
+                avalon.scan(page.root[0], page.model.vm);
+
+                if(data.img&&data.img!=null&&data.img!=''){
+                    var data={
+                        id : data.img,
+                        uri : data.imgFile.uri
+                    }
+                    imgFile.resetImg(data);
+                }
+
+            }
+        });
+
+    });
+    </script>

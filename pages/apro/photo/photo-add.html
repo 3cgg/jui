@@ -1,0 +1,129 @@
+	 <!-- Main content -->
+    <section class="content"  id="addPhotoSection" >
+    	<div class="box box-bys-btn">
+	        <div class="box-footer">
+	          <button type="button" class="btn btn-primary"  id="addPhotoBtn" >提交</button>
+	          <button type="button" class="btn btn-primary"
+	          onclick='$(this).goView("/pages/apro/photo/photo-list.html");'
+	          >返回</button>
+                <div class="box-tools pull-right">
+                    新增
+                </div>
+	        </div> 
+      </div>
+    	
+    	<div class="box box-bys-content">
+	    	<!--   .box-header   -->
+	        <!-- /.box-header -->
+	        
+	        <div class="box-body">
+	        
+	        <form role="form"  id="addPhotoForm"  class="form-horizontal">
+
+				<div class="form-group">
+
+					<label for="img" class="col-sm-1 control-label requiredMask">相册图片</label>
+					<div class="col-sm-5">
+						<div name="fileUploadDiv"></div>
+						<input id="img" name="img" type="text" class="form-control"
+							   style="width:0px;height: 0px;padding: 0px;"></input>
+					</div>
+
+				</div>
+
+              	<div class="form-group">
+              	
+              	   <label for="description" class="col-sm-1 control-label">描述</label>
+                   <div class="col-sm-8">
+                    <textarea  id="description" name="description" class="form-control" rows="3" ></textarea>
+                  </div>
+              	  
+					
+              	
+              	  
+              	</div>
+					
+              	<!--<div class="form-group">-->
+              	<!---->
+              	   <!--<label for="matId" class="col-sm-1 control-label">matId</label>-->
+                   <!--<div class="col-sm-5">-->
+                    <!--<input  id="matId" name="matId" type="text" class="form-control"></input>-->
+                  <!--</div>-->
+              	  <!---->
+					<!---->
+              	<!---->
+              	  <!---->
+              	<!--</div>-->
+					
+    		</form>
+	          <!-- /.row -->
+	        </div>
+      </div>
+
+		<div id="filesDiv" style="display:none;">
+			<!--
+            <form role="form" id="caseImage1FileForm" class="form-horizontal">
+              <input type="file"  />
+            </form>-->
+		</div>
+
+    </section>
+	
+	
+	<script type="text/javascript">
+		
+		$_youapp.ready(function (){
+			
+			var page=$.extend({
+	    		root:$("#addPhotoSection"),
+	    		model:{
+	    		}
+	    	},$_youapp.pageTemplate);
+			
+			page.root.find("#addPhotoForm").validate({
+					rules: {
+						'img': {
+							   required: true,
+							   maxlength:64
+						   }
+						,
+						'description': {
+							   required: false,
+							   maxlength:255
+						   }
+					  },
+					  submitHandler:function(form){
+						  page.submitForm({
+							  url:'/photo/savePhoto',
+							  formSelector:form,
+							  success:function(data){
+								  page.root.goView('/pages/apro/photo/photo-list.html');
+							  }
+							});
+					 }
+				});
+			page.root.find('#addPhotoBtn').on('click',function(){
+				page.root.find("#addPhotoForm").submit();
+			});
+
+            page.root.find('[name="fileUploadDiv"]').each(function(i,e){
+                var opt={
+                    $fsc : $(e),
+                    $fc : page.root.find('#filesDiv'), // form container
+                    added : function(data,obj){
+                        obj.opt.$fsc.parent().children('input').val(data.id);
+                    },
+                    removed : function(data,obj){
+                        obj.opt.$fsc.parent().children('input').val('');
+                    },
+                    types : ['image/jpeg','image/jpg','image/png']
+                }
+                fileAttach(opt);
+            });
+
+
+
+		});
+	</script>
+
+
