@@ -1,20 +1,18 @@
-1. page snapshot (reference content-list.html)
-(1). put directly the tag <snapshot> in the top level ,
-(2). when the page is re-rendered, the 'snapshot.shown' event is to be called,
-    so if you need do something to clear or reset , you can register the event callback function , i.e.
-    /*
-    page.root.find('snapshot').on('onCallback',function (event,args) {
-
-        console.log(event);
+## page snapshot (reference model: content-list.html)
+- put the tag ```<snapshot>``` in the top level ,
+- when the snapshot page is re-rendered, the 'snapshot.shown' event is triggered,
+  registering the event callback function is to clear or reset,  , i.e.
+    ```
+    page.root.find('snapshot').on('onCallback',function (event,args) {<br/>
+        console.log(event);<br/>
         page.listTable.ajax.reload(null,false);  //  the second parameter is pageable , if true the page is saved , false the previous page is reset.
     })
-    */
+    ```
 
-2. boot.js
-all configurations are in the file , include
-(1) jquery validation extension
-(2) datetime picker configuration
-(3) how to use code table function to initialize the codes from the server through ajax , if the code does not exist, you can configure
-    one through the customer function called  fnData
-(4) add trim text function on all input component
-(n) others ...
+## boot.js
+inculding configuration below : 
+- jquery validation extension
+- datetime picker configuration
+- how to use code table function to initialize the codes, get data from server or declare `fnData` function instead.
+- add `trim text` function on all input component
+- others ...
