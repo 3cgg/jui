@@ -10,7 +10,7 @@
     ```
 
 ## boot.js
-inculding configuration below : 
+including configuration below : 
 - jquery validation extension
 - datetime picker configuration
 - how to use code table function to initialize the codes, get data from server or declare `fnData` function instead.
