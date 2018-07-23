@@ -3,8 +3,8 @@
 - when the snapshot page is re-rendered, the 'snapshot.shown' event is triggered,
   registering the event callback function is to clear or reset,  , i.e.
     ```
-    page.root.find('snapshot').on('onCallback',function (event,args) {<br/>
-        console.log(event);<br/>
+    page.root.find('snapshot').on('onCallback',function (event,args) {
+        console.log(event);
         page.listTable.ajax.reload(null,false);  //  the second parameter is pageable , if true the page is saved , false the previous page is reset.
     })
     ```
