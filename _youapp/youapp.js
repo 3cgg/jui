@@ -289,7 +289,7 @@
                         $_youapp.$_util.log('bys error : '+options.url);
 		  				// goto login/html
 						if("BYS_ERROR"==resp.status
-							&&"No Authorised."==resp.data){
+							&&"E0005"==resp.data){
                             $_youapp.$_config.gotoLoginView();
 							return;
 						}
@@ -371,7 +371,7 @@
 						$_youapp.$_util.log('bys error : '+options.url);
                         // goto login/html
                         if("BYS_ERROR"==resp.status
-                            &&"No Authorised."==resp.data){
+                            &&"E0005"==resp.data){
                             $_youapp.$_config.gotoLoginView();
                             return;
                         }
