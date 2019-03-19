@@ -31,7 +31,7 @@ $_youapp.ready(function () {
     page.listTable = page.root.find('#roleOnUserListTable').initDataTable({
         url: "/usermanager/getRolesByUserIdByPage",
         urlDataFn: function () {
-            return {'id': getId()};
+            return {'userId': getId()};
         },
         paging: false,
         columns: [
@@ -60,7 +60,7 @@ $_youapp.ready(function () {
     page.userlistTable = page.root.find('#groupOnUserListTable').initDataTable({
         url: "/usermanager/getGroupsByUserIdByPage",
         urlDataFn: function () {
-            return {'id': getId()};
+            return {'userId': getId()};
         },
         paging: false,
         columns: [
