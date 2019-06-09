@@ -74,17 +74,17 @@ $.fn.extend({
 	            	var rowId=row.id;
 	            	if(_ops.view){
 	            		viewHtml='<a  data-rowId="'+rowId+'"  id="row_view_btn_'+rowId+'" name="row_view_btn"  '
-	            		+ ' style="" class="btn btn-link font-blue"  title="查看"><i class="glyph-icon icon-eye"></i></a>';
+	            		+ ' style="" class="btn btn-link text-blue"  title="查看"><i class="glyphicon glyphicon-arrow-right"></i></a>';
 	            	}
 	            	var editHtml='';
 	            	if(_ops.edit){
 	            		editHtml='<a data-rowId="'+rowId+'"  id="row_edit_btn_'+rowId+'" name="row_edit_btn"  '
-	            		+ '  style="" class="btn btn-link font-green" title="编辑" ><i class="glyph-icon icon-pencil"></i></a>';
+	            		+ '  style="" class="btn btn-link text-green" title="编辑" ><i class="glyphicon glyphicon-pencil"></i></a>';
 	            	}
 	            	var delHtml='';
 	            	if(_ops.del){
 	            		delHtml='<a data-rowId="'+rowId+'"  id="row_del_btn_'+rowId+'" name="row_del_btn"   '
-	            		+ ' style="" class="btn btn-link font-red" title="删除" ><i class="glyph-icon icon-trash"></i></a>';
+	            		+ ' style="" class="btn btn-link text-red" title="删除" ><i class="glyphicon glyphicon-minus"></i></a>';
 	            	}
 	            	
 	            	return '<div style="">'+viewHtml+editHtml+delHtml+'<div>';

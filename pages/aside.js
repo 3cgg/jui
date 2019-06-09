@@ -10,18 +10,18 @@ $_youapp.ready(function() {
     },$_youapp.pageTemplate);
 
     function getMenuNode(_name){
-        var $menuNode=page.root.find('#_template_treeview > #_template_treeview_menu>ul>li ').clone(false);
+        var $menuNode=page.root.find('#_template_treeview > #_template_treeview_menu>li ').clone(false);
         var $menuNodeLink=$menuNode.find('a');
         $menuNodeLink.find('i:first').next('span').text(_name);
         return $menuNode;
     }
 
     function appendMenu(parent,child){
-        $(parent).find('.sidebar-submenu').first().children('ul').append($(child));
+        $(parent).find('.treeview-menu').first().append($(child));
     }
 
     function getMenuItem(data){
-        var $menuItem=page.root.find('#_template_treeview > #_template_treeview_item> ul>li ').clone(false);
+        var $menuItem=page.root.find('#_template_treeview > #_template_treeview_item>li ').clone(false);
         var $menuItemLink=$menuItem.find('a');
         $menuItemLink.val('href','javascript:void(0)');
         $menuItemLink.data('url',data.url);
@@ -74,32 +74,31 @@ $_youapp.ready(function() {
             }catch (e) {
                 page.warning(e);
             }
-            $sideBar.find('a[data-url]').on('click',function(event){
-                debugger
+            $sideBar.find('a[data-url]').on('click',function(){
                 $_youapp.$_html.htmlView($(this).data('url'),'contentContent',true);
                 $(this).closest('li').addClass('active');
             });
         }
     });
 
-    $(document).on('click','.sf-with-ul',function(){
-        $(this).next().toggle(600);
-    });
+    // $(document).on('click','.sf-with-ul',function(){
+    //     $(this).next().toggle(600);
+    // });
 
-    var $menu=page.root;
-    $menu.css({
-        'overflow-y':'auto'
-    });
-    $menu.hover(function(){
-        $menu.css({
-            'overflow-y':'auto'
-        });
-    },function(){
-        $menu.css({
-            'overflow-y':'hidden'
-        });
-        // $menu.find('.treeview').width($menu.innerWidth());
-    });
+    // var $menu=page.root;
+    // $menu.css({
+    //     'overflow-y':'auto'
+    // });
+    // $menu.hover(function(){
+    //     $menu.css({
+    //         'overflow-y':'auto'
+    //     });
+    // },function(){
+    //     $menu.css({
+    //         'overflow-y':'hidden'
+    //     });
+    //     // $menu.find('.treeview').width($menu.innerWidth());
+    // });
 
     // function setHeight(){
     //     var windowHeight=$(window).height();
