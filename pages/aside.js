@@ -123,10 +123,10 @@ $_youapp.ready(function() {
 
 
     //
-    page.root.on('show.bs.collapse',function(){
-        page.info('aside show...');
-    });
-    page.root.on('hide.bs.collapse',function(){
-        page.info('aside hide...');
-    })
+    // page.root.on('show.bs.collapse',function(){
+    //     page.info('aside show...');
+    // });
+    // page.root.on('hide.bs.collapse',function(){
+    //     page.info('aside hide...');
+    // })
 })
